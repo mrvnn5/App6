@@ -1,90 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:minWidth="25px"
     android:minHeight="25px"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/linearLayoutV" >
-    <LinearLayout
-        android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:id="@+id/foodItem">
+    <View
+        android:layout_marginHorizontal="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" 
+        android:background="#eff0ec"/>
+
+    <RelativeLayout
+        android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:paddingHorizontal="15dp"
+        android:paddingBottom="5dp"
         android:id="@+id/linearLayoutHTop">
-        
-        <ImageView
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.15"
-            android:id="@+id/imageView1" />
+
         <TextView
-            android:text="Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.6"
-            android:id="@+id/textView1" />
+            android:text="Text"
+            android:id="@+id/product"/>
         <TextView
-            android:text="Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.15"
-            android:id="@+id/textView2" />
-        <ImageButton
-            android:background="@color/mtrl_btn_transparent_bg_color"
-            android:src="@drawable/round_add_24"
+            android:layout_alignParentRight="true"
+            android:id="@+id/cal"
+            android:text="Text"/>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:id="@+id/imageButton1" />
+            android:layout_below="@+id/product"
+            android:id="@+id/weight"
+            android:text="Text"/>
 
 
 
-    </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:paddingBottom="5dp"
+        android:gravity="center_vertical"
         android:id="@+id/linearLayoutHBot">
 
         <TextView
-            android:text="Text"
+            android:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2"
+            android:layout_weight="0.24"
             android:id="@+id/textView1" />
         <TextView
-            android:text="Text"
+            android:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2"
+            android:layout_weight="0.24"
             android:id="@+id/textView2" />
         <TextView
-            android:text="Text"
+            android:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:id="@+id/textView1" />
+            android:layout_weight="0.24"
+            android:id="@+id/textView3" />
         <TextView
-            android:text="Text"
+            android:text="0%"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:id="@+id/textView2" />
+            android:layout_weight="0.24"
+            android:id="@+id/textView4" />
+            
         <ImageButton
             android:background="@color/mtrl_btn_transparent_bg_color"
-            android:src="@drawable/round_expand_more_24"
+            android:src="@drawable/round_delete_outline_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:id="@+id/imageButton1" />
+            android:layout_weight="0.01"/>
 
     </LinearLayout>
-
 </LinearLayout>

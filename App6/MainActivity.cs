@@ -10,7 +10,7 @@ using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace App6
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
+    [Activity(Label = "@string/app_name", Theme = "@style/MyTheme.Splash", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
         private List<MealParentItem> mealParentItems;
@@ -21,10 +21,15 @@ namespace App6
         protected override void OnCreate(Bundle savedInstanceState)
         {
             AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
+            base.SetTheme(Resource.Style.AppTheme);
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetActionBar(toolbar);
+            ActionBar.Title = "My Toolbar";
+
 
             mealParentItems = new List<MealParentItem>
             {

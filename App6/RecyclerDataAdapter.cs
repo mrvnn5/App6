@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using AndroidX.CardView.Widget;
 using AndroidX.Core.Content;
 using AndroidX.RecyclerView.Widget;
 using System;
@@ -33,8 +34,8 @@ namespace App6
             int noOfChildTextViews = vh.linearLayout_childItems.ChildCount;
             for (int index = 0; index < noOfChildTextViews; index++)
             {
-                TextView currentTextView = (TextView)vh.linearLayout_childItems.GetChildAt(index);
-                currentTextView.Visibility = ViewStates.Visible;
+                View currentView = (View)vh.linearLayout_childItems.GetChildAt(index);
+                currentView.Visibility = ViewStates.Visible;
             }
 
             int noOfChild = mealParentItem.getChildDataItems().Count;
@@ -42,14 +43,9 @@ namespace App6
             {
                 for (int index = noOfChild; index < noOfChildTextViews; index++)
                 {
-                    TextView currentTextView = (TextView)vh.linearLayout_childItems.GetChildAt(index);
-                    currentTextView.Visibility = ViewStates.Gone;
+                    View currentView = (View)vh.linearLayout_childItems.GetChildAt(index);
+                    currentView.Visibility = ViewStates.Gone;
                 }
-            }
-            for (int textViewIndex = 0; textViewIndex < noOfChild; textViewIndex++)
-            {
-                TextView currentTextView = (TextView)vh.linearLayout_childItems.GetChildAt(textViewIndex);
-                currentTextView.Text = mealParentItem.getChildDataItems()[textViewIndex].getChildName();
             }
         }
 
@@ -87,16 +83,14 @@ namespace App6
             }
             for (int indexView = 0; indexView < intMaxNoOfChild; indexView++)
             {
-                TextView textView = new TextView(context);
-                textView.Id = indexView;
-                textView.SetPadding(0, 20, 0, 20);
-                textView.Gravity = GravityFlags.Center;
+                View view = LayoutInflater.From(context).Inflate(Resource.Layout.food_item, linearLayout_childItems, false);
+                view.Id = indexView;
                 //textView.SetBackground(ContextCompat.getDrawable(context, R.drawable.background_sub_module_text));
                 //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, LinearLayout.LayoutParams.WRAP_CONTENT);
                 //textView.SetOnClickListener(this);
-                linearLayout_childItems.AddView(textView);
+                linearLayout_childItems.AddView(view);
             }
-            itemView.FindViewById<LinearLayout>(Resource.Id.linearLayoutHBot).Click += (sender, args) =>
+            itemView.FindViewById<CardView>(Resource.Id.mealCardView).Click += (sender, args) =>
             {
                 /*if ((sender as View).Id == Resource.Id.tv_parentName)
                 {
