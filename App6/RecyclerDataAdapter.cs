@@ -30,6 +30,7 @@ namespace App6
             MealParentItem mealParentItem = mealParentItems[position];
             MealViewHolder vh = holder as MealViewHolder;
             vh.ParentName.Text = mealParentItem.getParentName();
+            vh.ParentImage.SetImageResource(mealParentItem.getImageId());
             //
             int noOfChildTextViews = vh.linearLayout_childItems.ChildCount;
             for (int index = 0; index < noOfChildTextViews; index++)
@@ -67,12 +68,17 @@ namespace App6
         private Android.Content.Context context;
         public LinearLayout linearLayout_childItems;
         public TextView ParentName { get; private set; }
+        public ImageView ParentImage { get; private set; }
+        public ImageView ExpandButton { get; private set; }
         public MealViewHolder(View itemView, List<MealParentItem> mealParentItems) : base(itemView)
         {
             context = itemView.Context;
             this.mealParentItems = mealParentItems;
             linearLayout_childItems = itemView.FindViewById<LinearLayout>(Resource.Id.ll_child_items);
             ParentName = itemView.FindViewById<LinearLayout>(Resource.Id.linearLayoutHTop).FindViewById<TextView>(Resource.Id.tv_parentName);
+            ParentImage = itemView.FindViewById<LinearLayout>(Resource.Id.linearLayoutHTop).FindViewById<ImageView>(Resource.Id.imageView);
+            ExpandButton = itemView.FindViewById<LinearLayout>(Resource.Id.linearLayoutHBot).FindViewById<ImageView>(Resource.Id.expandButton);
+
 
             linearLayout_childItems.Visibility = ViewStates.Gone;
             int intMaxNoOfChild = 0;
@@ -109,10 +115,12 @@ namespace App6
                 }*/
                 if (linearLayout_childItems.Visibility == ViewStates.Visible)
                 {
+                    ExpandButton.SetImageResource(Resource.Drawable.round_expand_more_24);
                     linearLayout_childItems.Visibility = ViewStates.Gone;
                 }
                 else
                 {
+                    ExpandButton.SetImageResource(Resource.Drawable.round_expand_less_24);
                     linearLayout_childItems.Visibility = ViewStates.Visible;
                 }
             };

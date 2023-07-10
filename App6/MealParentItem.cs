@@ -15,6 +15,7 @@ namespace App6
     {
         private String parentName;
         private List<MealChildItem> childDataItems = new List<MealChildItem>();
+        private int imageId;
 
         public MealParentItem(String parentName, List<MealChildItem> childDataItems)
         {
@@ -26,6 +27,12 @@ namespace App6
         {
             this.parentName = parentName;
         }
+        public MealParentItem(String parentName, List<MealChildItem> childDataItems, int imageId)
+        {
+            this.parentName = parentName;
+            this.childDataItems = childDataItems;
+            this.imageId = imageId;
+        }
 
         public String getParentName()
         {
@@ -35,6 +42,16 @@ namespace App6
         public void setParentName(String parentName)
         {
             this.parentName = parentName;
+        }
+
+        public int getImageId()
+        {
+            return imageId;
+        }
+
+        public void setImageId(int imageId)
+        {
+            this.imageId = imageId;
         }
 
         public List<MealChildItem> getChildDataItems()

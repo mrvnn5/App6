@@ -8,6 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="5dp"
+    android:background="@color/splash_background"    
     android:id="@+id/foodItem">
     <View
         android:layout_marginHorizontal="10dp"
@@ -22,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
+        android:background="@color/splash_background"    
         android:paddingBottom="5dp"
         android:id="@+id/linearLayoutHTop">
 
@@ -29,19 +31,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Text"
+            android:textColor="@color/colorPrimaryDark"
             android:id="@+id/product"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:id="@+id/cal"
-            android:text="Text"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:text="0"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/product"
             android:id="@+id/weight"
-            android:text="Text"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:text="0"/>
 
 
 
@@ -55,6 +60,7 @@
         android:paddingHorizontal="15dp"
         android:paddingBottom="5dp"
         android:gravity="center_vertical"
+        android:background="@color/splash_background"    
         android:id="@+id/linearLayoutHBot">
 
         <TextView
@@ -62,28 +68,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
+            android:textColor="@color/colorPrimaryDark"
             android:id="@+id/textView1" />
         <TextView
             android:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
+            android:textColor="@color/colorPrimaryDark"
             android:id="@+id/textView2" />
         <TextView
             android:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
+            android:textColor="@color/colorPrimaryDark"
             android:id="@+id/textView3" />
         <TextView
             android:text="0%"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
+            android:textColor="@color/colorPrimaryDark"
             android:id="@+id/textView4" />
             
         <ImageButton
             android:background="@color/mtrl_btn_transparent_bg_color"
+            android:tint="@android:color/holo_red_light"
             android:src="@drawable/round_delete_outline_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

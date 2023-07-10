@@ -43,22 +43,22 @@ namespace App6
                 {
                     new MealChildItem("rebenok1"),
                     new MealChildItem("rebenok2"),
-                }),
+                }, Resource.Drawable.morning),
                 new MealParentItem("Обед", new List<MealChildItem>
                 {
                     new MealChildItem("rebenok1"),
                     new MealChildItem("rebenok2"),
-                }),
+                }, Resource.Drawable.day),
                 new MealParentItem("Ужин", new List<MealChildItem>
                 {
                     new MealChildItem("rebenok1"),
                     new MealChildItem("rebenok2"),
-                }),
+                }, Resource.Drawable.night),
                 new MealParentItem("Перекус", new List<MealChildItem>
                 {
                     new MealChildItem("rebenok1"),
                     new MealChildItem("rebenok2"),
-                })
+                }, Resource.Drawable.other)
             };
 
             recyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
@@ -69,6 +69,8 @@ namespace App6
 
             recyclerDataAdapter = new RecyclerDataAdapter(mealParentItems);
             recyclerView.SetAdapter(recyclerDataAdapter);
+
+            
 
             /*items = new List<string>();
 
@@ -84,14 +86,19 @@ namespace App6
             {
                 DatePickerFragment frag = DatePickerFragment.NewInstance(currentDate, delegate (DateTime time)
                 {
+                    currentDate = time.Date;
                     if (time.Date == DateTime.Now.Date) 
                     {
                         dateTextView.Text = "Сегодня";
                     } else if (time.Date == DateTime.Now.AddDays(1).Date)
                     {
                         dateTextView.Text = "Завтра";
-                    } else
-                    dateTextView.Text = time.ToLongDateString();
+                    } else if (time.Date == DateTime.Now.AddDays(-1).Date)
+                    {
+                        dateTextView.Text = "Вчера";
+                    }
+                    else
+                        dateTextView.Text = time.ToLongDateString();
                 });
                 
                 frag.Show(FragmentManager, DatePickerFragment.TAG);

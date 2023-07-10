@@ -9,20 +9,87 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/main_content"
+        android:layout_below="@id/toolbar">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:id="@+id/recyclerView">
+        <androidx.recyclerview.widget.RecyclerView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/recyclerView">
 
+        </androidx.recyclerview.widget.RecyclerView>
+        <Toolbar
+              android:id="@+id/total_toolbar"
+              android:minHeight="?android:attr/actionBarSize"
+              android:background="@color/bottomToolBar"
+              android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              
+              android:layout_below="@id/recyclerView">
+            
+           <RelativeLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                android:paddingBottom="10dp">
 
+                <TextView
+                        android:paddingTop="10dp"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="Сводка"
+                        android:textSize="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView1" />
+                <TextView
+                       android:textColor="@color/colorPrimaryDark"
+                       android:text="Калорий осталось:"
+                       android:paddingHorizontal="16dp"
+                       android:textSize="14dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@id/textView1"
+                       android:id="@+id/textView2" />
+                <TextView
+                    
+                       android:textColor="@color/colorPrimaryDark"
+                       android:text="Калорий съедено:"
+                       android:paddingHorizontal="16dp"
+                       android:textSize="14dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@id/textView2"
+                       android:id="@+id/textView3" />
+                <TextView
+                       android:textColor="@color/colorPrimaryDark"
+                       android:text="0"
+                       android:textSize="14dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@id/textView1"
+                       android:layout_toRightOf="@id/textView2"
+                       android:id="@+id/calLeftTextView" />
+                <TextView
+                    
+                       android:textColor="@color/colorPrimaryDark"
+                       android:text="0"
+                       android:textSize="14dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@id/textView2"
+                       android:layout_toRightOf="@id/textView2"
+                       android:id="@+id/calUsedTextView" />
+            
+            </RelativeLayout>
 
-    </androidx.recyclerview.widget.RecyclerView>
-    
-
-
-
+        </Toolbar>
+    </LinearLayout>
 </RelativeLayout >

@@ -4,8 +4,9 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="72dp"
+    
     android:minHeight="?android:attr/actionBarSize"
-    android:background="?android:attr/colorPrimary"
+    android:background="?android:attr/colorPrimaryDark"
     android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar">
     
     <RelativeLayout
@@ -26,6 +27,7 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:height="72dp"
+            android:textColor="#fcfcf5"
             android:text="Сегодня"
             android:textAlignment="center"
             android:textSize="20dp"

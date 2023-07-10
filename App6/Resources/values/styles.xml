@@ -5,8 +5,8 @@
         <!-- Customize your theme here. -->
 		<item name="android:windowNoTitle">true</item>
 		<item name="android:windowActionBar">false</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">#03620d</item>
+        <item name="colorPrimaryDark">#0a410f</item>
         <item name="colorAccent">@color/colorAccent</item>
 		<item name="android:windowBackground">#fcfcf5</item>
     </style>
