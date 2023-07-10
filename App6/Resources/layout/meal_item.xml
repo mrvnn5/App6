@@ -53,7 +53,7 @@
             <ImageButton
                 android:background="@color/mtrl_btn_transparent_bg_color"
                 android:src="@drawable/round_add_24"
-                android:tint="@color/colorPrimaryDark"
+                android:tint="@color/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.1"
