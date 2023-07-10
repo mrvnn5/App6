@@ -61,7 +61,7 @@
                 <TextView
                     
                        android:textColor="@color/colorPrimaryDark"
-                       android:text="Калорий съедено:"
+                       android:text="Калорий употреблено:"
                        android:paddingHorizontal="16dp"
                        android:textSize="14dp"
                        android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_below="@id/textView1"
-                       android:layout_toRightOf="@id/textView2"
+                       android:layout_toRightOf="@id/textView3"
                        android:id="@+id/calLeftTextView" />
                 <TextView
                     
@@ -85,7 +85,7 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_below="@id/textView2"
-                       android:layout_toRightOf="@id/textView2"
+                       android:layout_toRightOf="@id/textView3"
                        android:id="@+id/calUsedTextView" />
             
             </RelativeLayout>

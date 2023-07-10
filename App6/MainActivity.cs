@@ -131,6 +131,8 @@ namespace App6
             return frag;
         }
 
+
+
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
             

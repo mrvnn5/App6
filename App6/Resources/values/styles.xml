@@ -7,7 +7,7 @@
 		<item name="android:windowActionBar">false</item>
         <item name="colorPrimary">#03620d</item>
         <item name="colorPrimaryDark">#0a410f</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">#687D14</item>
 		<item name="android:windowBackground">#fcfcf5</item>
     </style>
 	<!-- splash screen -->
@@ -24,5 +24,6 @@
 		<item name="android:windowContentOverlay">@null</item>
 		<item name="android:windowActionBar">true</item>
 	</style>
+
 
 </resources>
