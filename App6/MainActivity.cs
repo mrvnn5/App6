@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
@@ -13,8 +14,8 @@ using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace App6
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/MyTheme.Splash", MainLauncher = true)]
-    public class MainActivity : AppCompatActivity
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait)]
+    public class MainActivity : Activity
     {
         private List<MealParentItem> mealParentItems;
         private RecyclerDataAdapter recyclerDataAdapter;
@@ -23,11 +24,8 @@ namespace App6
         private DateTime currentDate = DateTime.Today;
         private RecyclerView.LayoutManager mLayoutManager;
 
-        [Obsolete]
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
-            base.SetTheme(Resource.Style.AppTheme);
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource

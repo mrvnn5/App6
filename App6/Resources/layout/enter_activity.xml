@@ -6,22 +6,21 @@
     android:layout_height="match_parent"
     android:background="@color/splash_background">
     <ImageView
+        android:paddingTop="48dp"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/enter_logo"
-        android:paddingTop="150dp"
-        android:paddingBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/imageView1" />
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView1" 
+        android:layout_above="@+id/data"/>
 
     
     <RelativeLayout
             android:id="@+id/data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="50dp"
-            android:paddingVertical="50dp"
-            android:layout_below="@+id/imageView1">
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
            
 
                     <TextView
@@ -37,6 +36,7 @@
 
             
                     <EditText
+                        android:paddingVertical="3dp"
                         android:id="@+id/editText1"
                         android:inputType="textPersonName"
                         android:layout_width="180dp"
@@ -45,7 +45,6 @@
                         android:textSize="20dp"
                         android:layout_toRightOf="@+id/username"
                         android:maxLength="20"
-                        android:gravity="center"
                         android:background="@drawable/roundedborder_edittext"/>
                 
 
@@ -62,7 +61,7 @@
                                 android:text="Пароль"/>
 
                         <EditText
-            
+                                android:paddingVertical="3dp"
                                 android:id="@+id/editText2"
                                 android:inputType="textPassword"
                                 android:layout_width="180dp"
@@ -70,27 +69,27 @@
                                 android:layout_below="@+id/username"
                                 android:layout_toRightOf="@+id/username"
                                 android:textSize="20dp"
-                                android:text="pass"
                                 android:gravity="center"
                                 android:background="@drawable/roundedborder_edittext"/>
 
-</RelativeLayout>
+    </RelativeLayout>
 
     <Button
+        android:layout_centerHorizontal="true"
         android:text="Вход"
         android:textColor="@color/splash_background"
         android:textSize="18dp"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:paddingVertical="15dp"
+        android:layout_marginTop="36dp"
         android:gravity="center"
         android:layout_below="@+id/data"
-        android:layout_marginHorizontal="80dp"
         android:background="@drawable/signinbutton"
         android:id="@+id/signInbutton"/>
 
     <Button
-        
+        android:layout_centerHorizontal="true"
         android:id="@+id/signUpButton" 
         android:layout_below="@+id/signInbutton"
         android:text="@string/sign_up"
@@ -99,12 +98,7 @@
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginHorizontal="80dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/signupbutton"
-    />
-
-    
-
+        android:background="@color/mtrl_btn_transparent_bg_color"/>
 
 </RelativeLayout>

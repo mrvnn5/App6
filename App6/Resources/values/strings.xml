@@ -7,5 +7,23 @@
 		
 		This is an &lt;u&gt;underline&lt;/u&gt;
 	</string>
+
+	<string-array name="gender_spinner_array">
+		<item>Мужчина</item>
+		<item>Женщина</item>
+	</string-array>
+
+	<string-array name="activity_spinner_array">
+		<item>Низкая</item>
+		<item>Средняя</item>
+		<item>Высокая</item>
+		<item>Очень Высокая</item>
+	</string-array>
+	
+	<string-array name="plan_spinner_array">
+		<item>Потеря веса</item>
+		<item>Поддержание веса</item>
+		<item>Набор веса</item>
+	</string-array>
 	
 </resources>

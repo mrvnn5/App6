@@ -4,6 +4,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="72dp"
+    android:backgroundTint="@color/colorPrimaryDark"
     
     android:minHeight="?android:attr/actionBarSize"
     android:background="?android:attr/colorPrimaryDark"
@@ -14,7 +15,6 @@
         android:layout_height="72dp">
     
     <ImageView
-        android:gravity="center"
         android:background="@android:color/transparent"
         android:tint="#fcfcf5"
         android:src="@drawable/round_account_circle_white_48"
