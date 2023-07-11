@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">TCoYB</string>
     <string name="action_settings">Settings</string>
+	<string name="sign_up">Я новый пользователь</string>
+
+	<string name="your_string_here">
+		
+		This is an &lt;u&gt;underline&lt;/u&gt;
+	</string>
+	
 </resources>
