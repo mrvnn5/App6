@@ -4,29 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/splash_background">
+    android:background="@drawable/gradient">
 
 
-        <ImageButton
-            android:src="@drawable/outline_arrow_back_ios_24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:background="@android:color/transparent"
-            android:id="@+id/imageButton1"
-            android:tint="@color/bottomToolBar"/>
+   
 
 
         <TextView
               android:id="@+id/mainText"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+              android:layout_width="wrap_content"
+              android:layout_height="fill_parent"
               android:gravity="center"
               android:textSize="30dp"
               android:textColor="@color/colorPrimaryDark"
-              android:text="Добро Пожаловать!"
+              android:text="Мои Данные"
               android:layout_centerHorizontal="true" 
-        android:layout_above="@+id/data"/>
+              android:layout_above="@+id/data"/>
 
         <RelativeLayout
             android:id="@+id/data"
@@ -35,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
            
-
                     <TextView
                         android:id="@+id/username"     
                         android:layout_width="wrap_content"
@@ -221,20 +213,76 @@
                         android:padding="9dp"
                         android:background="@drawable/spinnerstyle"
                         android:entries="@array/plan_spinner_array"/>
-                   
+                                  
+                    <TextView
+            
+                        android:id="@+id/rci"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/plan"
+                        android:gravity="center"
+                        android:paddingBottom="30dp"
+                        android:paddingRight="30dp"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="РСК"/>
+
+        
+                    <TextView
+            
+                        android:id="@+id/rciEdit"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/plan"
+                        android:gravity="center"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_toRightOf="@+id/username"
+                        android:background="@drawable/roundedborder_edittext"/>
     </RelativeLayout>
 
-    <ImageButton
-        android:src="@drawable/outline_check_circle_black_48"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+     <Button
+        android:layout_centerHorizontal="true"
+        android:id="@+id/changeData" 
         android:layout_below="@+id/data"
-        android:id="@+id/imageButton2"
-        android:tint="@color/colorPrimary"
-        android:paddingTop="20dp"
-        android:background="@android:color/transparent"
-        android:layout_centerHorizontal="true" />
+        android:text="Изменить данные"
+        android:textColor="@color/colorAccent"
+        android:textSize="16dp"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/mtrl_btn_transparent_bg_color"/>
 
+            <RelativeLayout
+            android:id="@+id/buttons"
+            android:layout_below="@+id/changeData"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+                <ImageButton
+                    android:src="@drawable/round_home_black_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/changeData"
+                    android:id="@+id/homeButton"
+                    android:tint="@color/colorPrimary"
+                    android:paddingVertical="30dp"
+                    android:background="@android:color/transparent"
+                    />
+                <ImageButton
+                    android:src="@drawable/round_logout_black_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/changeData"
+                    android:layout_toRightOf="@+id/homeButton"
+                    android:id="@+id/logOutButton"
+                    android:tint="@color/colorPrimary"
+                    android:paddingVertical="30dp"
+                    android:background="@android:color/transparent"
+                    android:layout_centerHorizontal="true" 
+                    />
 
+            </RelativeLayout>
 
 </RelativeLayout>

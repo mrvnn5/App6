@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<LinearGradientBrush>
+            <GradientStop Color="Yellow"
+                          Offset="0.1" />
+            <GradientStop Color="Green"
+                          Offset="1.0" />
+</LinearGradientBrush>
