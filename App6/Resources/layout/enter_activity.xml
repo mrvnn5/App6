@@ -29,7 +29,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textSize="20dp"
-                        android:paddingRight="30dp"
+                        android:paddingRight="50dp"
                         android:paddingBottom="30dp"
                         android:textColor="@color/colorPrimaryDark"
                         android:text="Никнейм"/>
@@ -37,7 +37,7 @@
             
                     <EditText
                         android:paddingVertical="3dp"
-                        android:id="@+id/editText1"
+                        android:id="@+id/usernameEditText"
                         android:inputType="textPersonName"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
@@ -56,17 +56,43 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/username"
                                 android:gravity="center"
+                                android:paddingBottom="30dp"
                                 android:textSize="20dp"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:text="Пароль"/>
 
                         <EditText
                                 android:paddingVertical="3dp"
-                                android:id="@+id/editText2"
+                                android:id="@+id/passEditText"
                                 android:inputType="textPassword"
                                 android:layout_width="180dp"
                                 android:layout_height="wrap_content" 
                                 android:layout_below="@+id/username"
+                                android:layout_toRightOf="@+id/username"
+                                android:textSize="20dp"
+                                android:gravity="center"
+                                android:background="@drawable/roundedborder_edittext"/>
+
+                        <TextView
+                                android:visibility="invisible"
+            
+                                android:id="@+id/repeatpass"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/pass"
+                                android:gravity="center"
+                                android:textSize="20dp"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:text="Подтвердить"/>
+
+                        <EditText
+                                android:visibility="invisible"
+                                android:paddingVertical="3dp"
+                                android:id="@+id/repeatpassEditText"
+                                android:inputType="textPassword"
+                                android:layout_width="180dp"
+                                android:layout_height="wrap_content" 
+                                android:layout_below="@+id/pass"
                                 android:layout_toRightOf="@+id/username"
                                 android:textSize="20dp"
                                 android:gravity="center"
@@ -86,12 +112,12 @@
         android:gravity="center"
         android:layout_below="@+id/data"
         android:background="@drawable/signinbutton"
-        android:id="@+id/signInbutton"/>
+        android:id="@+id/signInButton"/>
 
     <Button
         android:layout_centerHorizontal="true"
         android:id="@+id/signUpButton" 
-        android:layout_below="@+id/signInbutton"
+        android:layout_below="@+id/signInButton"
         android:text="@string/sign_up"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16dp"

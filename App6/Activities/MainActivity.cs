@@ -1,20 +1,19 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
-using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.RecyclerView.Widget;
+using App6.Adapters;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using static AndroidX.RecyclerView.Widget.RecyclerView;
 
-namespace App6
+namespace App6.Activities
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait, NoHistory = true)]
     public class MainActivity : Activity
     {
         private List<MealParentItem> mealParentItems;
@@ -23,6 +22,7 @@ namespace App6
         private TextView dateTextView;
         private DateTime currentDate = DateTime.Today;
         private RecyclerView.LayoutManager mLayoutManager;
+        private ImageButton userButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -59,6 +59,8 @@ namespace App6
                 }, Resource.Drawable.other)
             };
 
+            userButton = FindViewById<ImageButton>(Resource.Id.userButton);
+
             recyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
             dateTextView = FindViewById<TextView>(Resource.Id.dateTextView);
 
@@ -68,7 +70,7 @@ namespace App6
             recyclerDataAdapter = new RecyclerDataAdapter(mealParentItems);
             recyclerView.SetAdapter(recyclerDataAdapter);
 
-            
+
 
             /*items = new List<string>();
 
@@ -79,6 +81,13 @@ namespace App6
 
             expandableListView = FindViewById<ExpandableListView>(Resource.Id.expandableListView1);
             expandableListView.SetAdapter(new ExpandableListAdapter(this, items));*/
+
+            userButton.Click += (sender, e) =>
+            {
+                Intent intent = new Intent(BaseContext, typeof(UserActivity));
+                intent.PutExtra("username", Intent.GetStringExtra("username"));
+                StartActivity(intent);
+            };
 
             dateTextView.Click += (sender, args) =>
             {

@@ -1,21 +1,10 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
+﻿using Android.Views;
 using Android.Widget;
 using AndroidX.CardView.Widget;
-using AndroidX.Core.Content;
 using AndroidX.RecyclerView.Widget;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using static Android.Views.View;
-using static AndroidX.RecyclerView.Widget.RecyclerView;
 
-namespace App6
+namespace App6.Adapters
 {
     public class RecyclerDataAdapter : RecyclerView.Adapter
     {

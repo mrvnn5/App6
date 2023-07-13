@@ -64,14 +64,19 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnterActivity.cs" />
-    <Compile Include="MainActivity.cs" />
-    <Compile Include="MealChildItem.cs" />
-    <Compile Include="MealParentItem.cs" />
-    <Compile Include="RecyclerDataAdapter.cs" />
-    <Compile Include="RegistrationActivity.cs" />
+    <Compile Include="Activities\EnterActivity.cs" />
+    <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Adapters\MealChildItem.cs" />
+    <Compile Include="Adapters\MealParentItem.cs" />
+    <Compile Include="Adapters\RecyclerDataAdapter.cs" />
+    <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\FoodItem.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\UserToken.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Activities\UserActivity.cs" />
+    <Compile Include="Singleton\RequestService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -678,9 +683,6 @@
     <AndroidResource Include="Resources\drawable\RoundedBorder_EditText.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\registration_activity.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\outline_check_circle_24.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -1093,6 +1095,18 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\gradient.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\RoundedBorder_EditTextSelected.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\spinnerStyleSelected.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

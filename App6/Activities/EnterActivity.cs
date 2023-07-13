@@ -8,23 +8,24 @@ using Android.Widget;
 using RestSharp;
 using RestSharp.Authenticators;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Security;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using static Android.Provider.Contacts.Intents;
 
-namespace App6
+namespace App6.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/MyTheme.Splash", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait, NoHistory = true)]
     public class EnterActivity : Activity
     {
-        private ImageButton enterButton;
+        private bool isSignIn = true;
+        private EditText username;
+        private EditText password;
+        private EditText passwordRepeat;
+        private TextView passwordRepeatText;
+        private Button signIn;
+        private Button signUp;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             /*Task<string> r = CheckUser();
@@ -54,16 +55,16 @@ namespace App6
                     }
                     else
                     {
-                        Toast.MakeText(BaseContext, content, ToastLength.Long).Show();
+                        //Toast.MakeText(BaseContext, content, ToastLength.Long).Show();
                         Console.Out.WriteLine("Response Body: \r\n {0}", content);
                     }
                 }
             }
 
 
-            if (true)
+            if (false)
             {
-                StartActivity(typeof(RegistrationActivity));
+                StartActivity(typeof(MainActivity));
                 OverridePendingTransition(0, 0);
             }
             base.SetTheme(Resource.Style.AppTheme); 
@@ -71,7 +72,61 @@ namespace App6
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.enter_activity);
 
+            username = FindViewById<EditText>(Resource.Id.usernameEditText);
+            password = FindViewById<EditText>(Resource.Id.passEditText);
+            passwordRepeat = FindViewById<EditText>(Resource.Id.repeatpassEditText);
+            signIn = FindViewById<Button>(Resource.Id.signInButton);
+            signUp = FindViewById<Button>(Resource.Id.signUpButton);
+            passwordRepeatText = FindViewById<TextView>(Resource.Id.repeatpass);
+
+            signUp.Click += (sender, args) => ChangeIsSignIn();
+            signIn.Click += (sender, args) => Continue();
+
             //Toast.MakeText(BaseContext, result, ToastLength.Long).Show();
+        }
+
+        public void Continue()
+        {
+            if(isSignIn)
+            {
+                //TODO server
+
+                Intent intentMain = new Intent(BaseContext, typeof(MainActivity));
+                intentMain.PutExtra("username", Intent.GetStringExtra("username"));
+                StartActivity(intentMain);
+                return;
+            }
+            if(password.Text != passwordRepeat.Text)
+            {
+                Toast.MakeText(BaseContext, "Пароли не совпадают", ToastLength.Long).Show();
+                return;
+            }
+            Intent intentUser = new Intent(BaseContext, typeof(UserActivity));
+            intentUser.PutExtra("isSignIn", isSignIn);
+            intentUser.PutExtra("username", username.Text);
+            intentUser.PutExtra("password", password.Text);
+            StartActivity(intentUser);
+            OverridePendingTransition(0, 0);
+        }
+
+        public void ChangeIsSignIn()
+        {
+            isSignIn = !isSignIn;
+
+            if(isSignIn)
+            {
+                passwordRepeatText.Visibility = ViewStates.Invisible;
+                passwordRepeat.Visibility = ViewStates.Invisible;
+                signIn.Text = "Вход";
+                signUp.Text = "Я новый пользователь";
+            } 
+            else
+            {
+                passwordRepeatText.Visibility = ViewStates.Visible;
+                passwordRepeat.Visibility = ViewStates.Visible;
+                signIn.Text = "Регистрация";
+                signUp.Text = "У меня уже есть аккаунт";
+            }
         }
 
         public async Task<string> CheckUser()
