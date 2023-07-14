@@ -2,6 +2,7 @@
 using Android.Widget;
 using AndroidX.CardView.Widget;
 using AndroidX.RecyclerView.Widget;
+using System;
 using System.Collections.Generic;
 
 namespace App6.Adapters
@@ -21,6 +22,14 @@ namespace App6.Adapters
             vh.ParentName.Text = mealParentItem.getParentName();
             vh.ParentImage.SetImageResource(mealParentItem.getImageId());
             //
+
+            for (int i = 0; i < mealParentItem.getChildDataItems().Count; i++)
+            {
+                View currentView = (View)vh.linearLayout_childItems.GetChildAt(i);
+                currentView.FindViewById<TextView>(Resource.Id.product).Text = mealParentItem.getChildDataItems()[i].Id.ToString();
+                currentView.FindViewById<TextView>(Resource.Id.weight).Text = mealParentItem.getChildDataItems()[i].Weight.ToString() + " г";
+            }
+
             int noOfChildTextViews = vh.linearLayout_childItems.ChildCount;
             for (int index = 0; index < noOfChildTextViews; index++)
             {

@@ -10,14 +10,19 @@ namespace App6.Models
         public int Weight { get; set; }
         public DateTime Date { get; set; }
         public MealType MealType { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) return false;
+            return Id == (obj as FoodItem).Id;
+        }
     }
 
     public enum MealType
     {
-        None = 0,
-        Breakfast = 1,
-        Lunch = 2,
-        Dinner = 3,
-        Snack = 4
+        Breakfast = 0,
+        Lunch = 1,
+        Dinner = 2,
+        Snack = 3
     }
 }

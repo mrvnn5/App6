@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using App6.Singleton;
 using RestSharp;
 using RestSharp.Authenticators;
 using System;
@@ -19,6 +20,8 @@ namespace App6.Activities
     [Activity(Label = "@string/app_name", Theme = "@style/MyTheme.Splash", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait, NoHistory = true)]
     public class EnterActivity : Activity
     {
+        private RequestService requestService;
+
         private bool isSignIn = true;
         private EditText username;
         private EditText password;
@@ -28,45 +31,15 @@ namespace App6.Activities
         private Button signUp;
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            /*Task<string> r = CheckUser();
-            r.Wait();
-            string result = r.Result;*/
+            requestService = RequestService.getInstance();
 
-            var request = HttpWebRequest.Create(@"https://cdn.jsdelivr.net/gh/goodwin74/prod_rus@latest/products.json");
-            request.ContentType = "application/json";
-            request.Headers.Add("ngrok-skip-browser-warning", "1");
-            request.Method = "GET";
-            ServicePointManager.ServerCertificateValidationCallback = new
-            RemoteCertificateValidationCallback
-            (
-               delegate { return true; }
-            );
-
-            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
-            {
-                if (response.StatusCode != HttpStatusCode.OK)
-                    Console.Out.WriteLine("Error fetching data. Server returned status code: {0}", response.StatusCode);
-                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                {
-                    var content = reader.ReadToEnd();
-                    if (string.IsNullOrWhiteSpace(content))
-                    {
-                        Console.Out.WriteLine("Response contained empty body...");
-                    }
-                    else
-                    {
-                        //Toast.MakeText(BaseContext, content, ToastLength.Long).Show();
-                        Console.Out.WriteLine("Response Body: \r\n {0}", content);
-                    }
-                }
-            }
-
-
-            if (false)
+            if (requestService.User != null)
             {
                 StartActivity(typeof(MainActivity));
                 OverridePendingTransition(0, 0);
             }
+
+
             base.SetTheme(Resource.Style.AppTheme); 
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -87,26 +60,35 @@ namespace App6.Activities
 
         public void Continue()
         {
-            if(isSignIn)
+            signIn.Enabled = false;
+            if (isSignIn)
             {
-                //TODO server
-
-                Intent intentMain = new Intent(BaseContext, typeof(MainActivity));
-                intentMain.PutExtra("username", Intent.GetStringExtra("username"));
-                StartActivity(intentMain);
-                return;
+                if (requestService.GetUser(username.Text, password.Text))
+                {
+                    StartActivity(typeof(MainActivity));
+                    return;
+                } 
+                else
+                {
+                    Toast.MakeText(BaseContext, "Неправильный никнейм или пароль", ToastLength.Long).Show();
+                    return;
+                }
             }
+
             if(password.Text != passwordRepeat.Text)
             {
                 Toast.MakeText(BaseContext, "Пароли не совпадают", ToastLength.Long).Show();
                 return;
+            } 
+            else if (requestService.CreateUser(username.Text, password.Text))
+            {
+                Intent intentUser = new Intent(BaseContext, typeof(UserActivity));
+                intentUser.PutExtra("isSignIn", isSignIn);
+                StartActivity(intentUser);
+                OverridePendingTransition(0, 0);
             }
-            Intent intentUser = new Intent(BaseContext, typeof(UserActivity));
-            intentUser.PutExtra("isSignIn", isSignIn);
-            intentUser.PutExtra("username", username.Text);
-            intentUser.PutExtra("password", password.Text);
-            StartActivity(intentUser);
-            OverridePendingTransition(0, 0);
+            else Toast.MakeText(BaseContext, "Пользователь с таким никнеймом уже существует", ToastLength.Long).Show();
+            signIn.Enabled = false;
         }
 
         public void ChangeIsSignIn()
@@ -128,25 +110,5 @@ namespace App6.Activities
                 signUp.Text = "У меня уже есть аккаунт";
             }
         }
-
-        public async Task<string> CheckUser()
-        {
-            /*var client = new RestClient();
-            var request = new RestRequest("https://jsonplaceholder.typicode.com/posts");
-            request.RequestFormat = DataFormat.Json;
-            Toast.MakeText(BaseContext, "gjlujnjdrf", ToastLength.Long).Show();
-            var response = await client.GetAsync(request);
-            Toast.MakeText(BaseContext, "ura", ToastLength.Long).Show();
-            return response.ToString();*/
-
-            string URL = "https://jsonplaceholder.typicode.com/posts";
-
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(URL);
-
-            string result = await response.Content.ReadAsStringAsync();
-            return result;
-        }
-
     }
 }

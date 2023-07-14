@@ -66,7 +66,6 @@
   <ItemGroup>
     <Compile Include="Activities\EnterActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="Adapters\MealChildItem.cs" />
     <Compile Include="Adapters\MealParentItem.cs" />
     <Compile Include="Adapters\RecyclerDataAdapter.cs" />
     <Compile Include="Models\AppUser.cs" />
@@ -110,6 +109,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
     <PackageReference Include="RestSharp">
       <Version>110.2.0</Version>
     </PackageReference>

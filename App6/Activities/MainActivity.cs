@@ -8,15 +8,19 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.RecyclerView.Widget;
 using App6.Adapters;
+using App6.Singleton;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace App6.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait, NoHistory = true)]
     public class MainActivity : Activity
     {
-        private List<MealParentItem> mealParentItems;
+        private RequestService requestService;
+
         private RecyclerDataAdapter recyclerDataAdapter;
         private RecyclerView recyclerView;
         private TextView dateTextView;
@@ -26,6 +30,8 @@ namespace App6.Activities
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            requestService = RequestService.getInstance();
+
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
@@ -33,31 +39,6 @@ namespace App6.Activities
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetActionBar(toolbar);
             ActionBar.Title = "";
-
-
-            mealParentItems = new List<MealParentItem>
-            {
-                new MealParentItem("Завтрак", new List<MealChildItem>
-                {
-                    new MealChildItem("rebenok1"),
-                    new MealChildItem("rebenok2"),
-                }, Resource.Drawable.morning),
-                new MealParentItem("Обед", new List<MealChildItem>
-                {
-                    new MealChildItem("rebenok1"),
-                    new MealChildItem("rebenok2"),
-                }, Resource.Drawable.day),
-                new MealParentItem("Ужин", new List<MealChildItem>
-                {
-                    new MealChildItem("rebenok1"),
-                    new MealChildItem("rebenok2"),
-                }, Resource.Drawable.night),
-                new MealParentItem("Перекус", new List<MealChildItem>
-                {
-                    new MealChildItem("rebenok1"),
-                    new MealChildItem("rebenok2"),
-                }, Resource.Drawable.other)
-            };
 
             userButton = FindViewById<ImageButton>(Resource.Id.userButton);
 
@@ -67,20 +48,7 @@ namespace App6.Activities
             mLayoutManager = new LinearLayoutManager(this);
             recyclerView.SetLayoutManager(mLayoutManager);
 
-            recyclerDataAdapter = new RecyclerDataAdapter(mealParentItems);
-            recyclerView.SetAdapter(recyclerDataAdapter);
-
-
-
-            /*items = new List<string>();
-
-            items.Add("asdasdad");
-            items.Add("sdaffdgfds");
-            items.Add("lkfghdfd");
-
-
-            expandableListView = FindViewById<ExpandableListView>(Resource.Id.expandableListView1);
-            expandableListView.SetAdapter(new ExpandableListAdapter(this, items));*/
+            UpdateView();
 
             userButton.Click += (sender, e) =>
             {
@@ -94,6 +62,7 @@ namespace App6.Activities
                 DatePickerFragment frag = DatePickerFragment.NewInstance(currentDate, delegate (DateTime time)
                 {
                     currentDate = time.Date;
+                    UpdateView();
                     if (time.Date == DateTime.Now.Date) 
                     {
                         dateTextView.Text = "Сегодня";
@@ -111,6 +80,29 @@ namespace App6.Activities
                 frag.Show(FragmentManager, DatePickerFragment.TAG);
             };
         }
+
+        public void UpdateView()
+        {
+            List<MealParentItem> mealParentItems = new List<MealParentItem>
+            {
+                new MealParentItem("Завтрак", 
+                        requestService.User.FoodItems.Where(f => f.Date.Date == currentDate && f.MealType == Models.MealType.Breakfast).ToList(), 
+                        Resource.Drawable.morning),
+                new MealParentItem("Обед",
+                        requestService.User.FoodItems.Where(f => f.Date.Date == currentDate && f.MealType == Models.MealType.Lunch).ToList(),
+                        Resource.Drawable.day),
+                new MealParentItem("Ужин",
+                        requestService.User.FoodItems.Where(f => f.Date.Date == currentDate && f.MealType == Models.MealType.Dinner).ToList(),
+                        Resource.Drawable.night),
+                new MealParentItem("Перекус",
+                        requestService.User.FoodItems.Where(f => f.Date.Date == currentDate && f.MealType == Models.MealType.Snack).ToList(),
+                        Resource.Drawable.other)
+            };
+
+            recyclerDataAdapter = new RecyclerDataAdapter(mealParentItems);
+            recyclerView.SetAdapter(recyclerDataAdapter);
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

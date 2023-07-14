@@ -127,18 +127,15 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:text="Дата рождения"/>
 
-                    <EditText
+                    <TextView
             
                         android:id="@+id/editAge"
-                        android:inputType="date"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content" 
                         android:layout_below="@+id/gender"
                         android:layout_toRightOf="@+id/height"
                         android:textSize="20dp"
                         android:gravity="center"
-                        android:focusable="false"
-                        android:clickable="false"
                         android:padding="7dp"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="@drawable/roundedborder_edittext"/>
@@ -228,7 +225,18 @@
                         android:background="@drawable/roundedborder_edittext"/>
     </RelativeLayout>
 
+    <ProgressBar
+        android:layout_below="@+id/data"
+        android:layout_above="@+id/buttons"
+        android:layout_height="20dp"
+        android:layout_width="match_parent"
+        android:id="@+id/activityIndicator"
+        android:indeterminateOnly="true"
+        android:keepScreenOn="true"
+        android:progressTint="@color/colorPrimary"/>
+
      <Button
+        android:paddingVertical="10dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/changeData" 
         android:layout_below="@+id/data"

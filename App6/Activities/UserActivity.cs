@@ -4,16 +4,22 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using App6.Singleton;
+using System;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 
 namespace App6.Activities
 {
     [Activity(Label = "UserActivity", ScreenOrientation = ScreenOrientation.Portrait, NoHistory = true)]
     public class UserActivity : Activity
     {
+        private RequestService requestService;
+
         private TextView userGreeting;
         private EditText editHeight;
         private EditText editWeight;
-        private EditText editAge;
+        private TextView editAge;
         private Spinner spinnerGender;
         private Spinner spinnerActivity;
         private Spinner spinnerPlan;
@@ -22,12 +28,15 @@ namespace App6.Activities
         private Button changeData;
         private ImageButton homeButton;
         private ImageButton logOutButton;
+        private ProgressBar progressBar;
 
         private bool isChangeMode;
 
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            requestService = RequestService.getInstance();
+
+            DateTime currentDate = requestService.User.BirthDate;
             
             base.OnCreate(savedInstanceState); 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -36,7 +45,7 @@ namespace App6.Activities
             userGreeting = FindViewById<TextView>(Resource.Id.userGreeting);
             editHeight = FindViewById<EditText>(Resource.Id.editHeight);
             editWeight = FindViewById<EditText>(Resource.Id.editWeight);
-            editAge = FindViewById<EditText>(Resource.Id.editAge);
+            editAge = FindViewById<TextView>(Resource.Id.editAge);
             spinnerGender = FindViewById<Spinner>(Resource.Id.spinnerGender);
             spinnerActivity = FindViewById<Spinner>(Resource.Id.spinnerActivity);
             spinnerPlan = FindViewById<Spinner>(Resource.Id.spinnerPlan);
@@ -45,14 +54,25 @@ namespace App6.Activities
             changeData = FindViewById<Button>(Resource.Id.changeData);
             homeButton = FindViewById<ImageButton>(Resource.Id.homeButton);
             logOutButton = FindViewById<ImageButton>(Resource.Id.logOutButton);
+            progressBar = FindViewById<ProgressBar>(Resource.Id.activityIndicator);
 
-            userGreeting.Text = "Привет, " + Intent.GetStringExtra("username") + "!";
+            progressBar.Visibility = ViewStates.Gone;
+
+            userGreeting.Text = "Привет, " + requestService.User.Username + "!";
 
             if (Intent.GetBooleanExtra("isSignIn", true))
             {
                 SetChageMode(false);
                 homeButton.Visibility = ViewStates.Visible;
                 logOutButton.Visibility = ViewStates.Visible;
+                editHeight.Text = requestService.User.Height.ToString();
+                editWeight.Text = requestService.User.Weight.ToString();
+                editAge.Text = requestService.User.BirthDate.Date.ToString("dd/MM/yyyy");
+                spinnerGender.SetSelection((int)requestService.User.Sex);
+                spinnerActivity.SetSelection((int)requestService.User.Activity);
+                spinnerPlan.SetSelection((int)requestService.User.Plan);
+
+                rciValue.Text = requestService.GetRCI().ToString();
             }
             else
             {
@@ -65,40 +85,67 @@ namespace App6.Activities
 
             changeData.Click += (s, e) =>
             {
-                if(isChangeMode)
+                changeData.Enabled = false;
+                changeData.Visibility = ViewStates.Gone;
+                progressBar.Visibility = ViewStates.Visible;
+                if (isChangeMode)
                 {
+                    requestService.User.Height = Convert.ToInt32(editHeight.Text);
+                    requestService.User.Weight = Convert.ToInt32(editWeight.Text);
+                    requestService.User.BirthDate = DateTime.ParseExact(editAge.Text, "dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                    requestService.User.Sex = (Models.Sex)spinnerGender.SelectedItemPosition;
+                    requestService.User.Activity = (Models.Activity)spinnerActivity.SelectedItemPosition;
+                    requestService.User.Plan = (Models.Plan)spinnerPlan.SelectedItemPosition;
+
+                    requestService.UpdateUser();
+
+                    rciValue.Text = requestService.GetRCI().ToString();
+
                     if (Intent.GetBooleanExtra("isSignIn", true))
                     {
-                        //TODO
-
                         SetChageMode(false);
                     }
                     else
                     {
-                        //TODO
-
-                        Intent intentMain = new Intent(BaseContext, typeof(MainActivity));
-                        intentMain.PutExtra("username", Intent.GetStringExtra("username"));
-                        StartActivity(intentMain);
+                        StartActivity(typeof(MainActivity));
                     }
                 }
                 else
                 {
                     SetChageMode(true);
                 }
+                changeData.Enabled = true;
+                changeData.Visibility = ViewStates.Gone;
+                progressBar.Visibility = ViewStates.Visible;
             };
 
             homeButton.Click += (s, e) =>
             {
-                Intent intentMain = new Intent(BaseContext, typeof(MainActivity));
-                intentMain.PutExtra("username", Intent.GetStringExtra("username"));
-                StartActivity(intentMain);
+                StartActivity(typeof(MainActivity));
             };
-        }
 
-        public void Register()
-        {
+            logOutButton.Click += (s, e) =>
+            {
+                requestService.ClearToken().Wait();
+                requestService.User = null;
+                StartActivity(typeof(EnterActivity));
+            };
 
+
+
+            editAge.Click += (sender, args) =>
+            {
+                if (isChangeMode)
+                {
+                    DatePickerFragment frag = DatePickerFragment.NewInstance(currentDate, delegate (DateTime time)
+                    {
+                        currentDate = time.Date;
+                        editAge.Text = currentDate.ToString("dd/MM/yyyy");
+                    });
+
+                    frag.Show(FragmentManager, DatePickerFragment.TAG);
+                }
+            };
         }
 
         public void SetChageMode(bool newChangeMode)
@@ -109,8 +156,6 @@ namespace App6.Activities
                 editHeight.Focusable = false;
                 editWeight.Clickable = false;
                 editWeight.Focusable = false;
-                editAge.Clickable = false;
-                editAge.Focusable = false;
                 spinnerGender.Clickable = false;
                 spinnerActivity.Clickable = false;
                 spinnerPlan.Clickable = false;
@@ -131,8 +176,6 @@ namespace App6.Activities
                 editHeight.FocusableInTouchMode = true;
                 editWeight.Clickable = true;
                 editWeight.FocusableInTouchMode = true;
-                editAge.Clickable = true;
-                editAge.FocusableInTouchMode = true;
                 spinnerGender.Clickable = true;
                 spinnerActivity.Clickable = true;
                 spinnerPlan.Clickable = true;

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace App6.Models
 {
@@ -10,11 +12,13 @@ namespace App6.Models
         public Sex Sex { get; set; }
         public Activity Activity { get; set; }
         public Plan Plan { get; set; }
-        public int Age { get; set; }
-        public string PasswordHash { get; set; }
-        public List<FoodItem> FoodItems { get; set; } = new List<FoodItem>();
+        public DateTime BirthDate { get; set; }
+        public string? PasswordHash { get; set; }
+        public UserToken? UserToken { get; set; }
+        public List<FoodItem>? FoodItems { get; set; } = new List<FoodItem>();
 
-        public AppUser(string username, int height, int weight, Sex sex, Activity activity, Plan plan, int age, string passwordHash)
+        [JsonConstructor]
+        public AppUser(string username, int height, int weight, Sex sex, Activity activity, Plan plan, DateTime birthDate, string passwordHash, UserToken userToken, List<FoodItem> foodItems)
         {
             Username = username;
             Height = height;
@@ -22,9 +26,36 @@ namespace App6.Models
             Sex = sex;
             Activity = activity;
             Plan = plan;
-            Age = age;
+            BirthDate = birthDate;
             PasswordHash = passwordHash;
+            UserToken = userToken;
+            FoodItems = foodItems;
         }
+
+        public AppUser(string username)
+        {
+            Username = username;
+            Height = 0;
+            Weight = 0;
+            Sex = 0;
+            Activity = 0;
+            Plan = 0;
+            BirthDate = DateTime.Now;
+            PasswordHash = "";
+        }
+        public AppUser()
+        {
+            Username = "";
+            Height = 0;
+            Weight = 0;
+            Sex = 0;
+            Activity = 0;
+            Plan = 0;
+            BirthDate = DateTime.Now;
+            PasswordHash = "";
+        }
+
+
     }
     public enum Sex
     {

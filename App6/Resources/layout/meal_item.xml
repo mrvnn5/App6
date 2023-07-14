@@ -105,6 +105,7 @@
             <ImageView
                 android:background="@color/mtrl_btn_transparent_bg_color"
                 android:src="@drawable/round_expand_more_24"
+                android:tint="@android:color/darker_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.01"

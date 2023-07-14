@@ -1,6 +1,11 @@
 <resources>
 
     <!-- Base application theme. -->
+	
+
+	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+		<item name="colorAccent">#687D14</item>
+	</style>
     <style name="AppTheme">
         <!-- Customize your theme here. -->
 		<item name="android:windowNoTitle">true</item>
@@ -9,6 +14,7 @@
         <item name="colorPrimaryDark">#0a410f</item>
         <item name="colorAccent">#687D14</item>
 		<item name="android:windowBackground">#fcfcf5</item>
+		<item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
     </style>
 	<!-- splash screen -->
 	<style name="MyTheme.Base" parent="Theme.AppCompat.Light">

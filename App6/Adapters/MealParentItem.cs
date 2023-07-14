@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App6.Models;
+using System;
 using System.Collections.Generic;
 
 namespace App6.Adapters
@@ -6,10 +7,10 @@ namespace App6.Adapters
     public class MealParentItem
     {
         private String parentName;
-        private List<MealChildItem> childDataItems = new List<MealChildItem>();
+        private List<FoodItem> childDataItems = new List<FoodItem>();
         private int imageId;
 
-        public MealParentItem(String parentName, List<MealChildItem> childDataItems)
+        public MealParentItem(String parentName, List<FoodItem> childDataItems)
         {
             this.parentName = parentName;
             this.childDataItems = childDataItems;
@@ -19,7 +20,7 @@ namespace App6.Adapters
         {
             this.parentName = parentName;
         }
-        public MealParentItem(String parentName, List<MealChildItem> childDataItems, int imageId)
+        public MealParentItem(String parentName, List<FoodItem> childDataItems, int imageId)
         {
             this.parentName = parentName;
             this.childDataItems = childDataItems;
@@ -46,12 +47,12 @@ namespace App6.Adapters
             this.imageId = imageId;
         }
 
-        public List<MealChildItem> getChildDataItems()
+        public List<FoodItem> getChildDataItems()
         {
             return childDataItems;
         }
 
-        public void setChildDataItems(List<MealChildItem> childDataItems)
+        public void setChildDataItems(List<FoodItem> childDataItems)
         {
             this.childDataItems = childDataItems;
         }

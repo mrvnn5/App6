@@ -6,4 +6,5 @@
 	<color name="grey">#eff0ec</color>
 	<color name="bottomToolBar">#dcdcdc</color>
 	<color name="splash_background">#FCFCF5</color>
+	<color name="editSelected">#6495ed</color>
 </resources>
