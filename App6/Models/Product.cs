@@ -20,15 +20,15 @@ namespace App6.Models
 
         public double GetProtein()
         {
-            return Convert.ToDouble(Bgu.Split(",")[0]);
+            return Convert.ToDouble(Bgu.Replace(",", " ").Replace(".", ",").Split(" ")[0]);
         }
         public double GetFat()
         {
-            return Convert.ToDouble(Bgu.Split(",")[1]);
+            return Convert.ToDouble(Bgu.Replace(",", " ").Replace(".", ",").Split(" ")[1]);
         }
         public double GetCarb()
         {
-            return Convert.ToDouble(Bgu.Split(",")[2]);
+            return Convert.ToDouble(Bgu.Replace(",", " ").Replace(".", ",").Split(" ")[2]);
         }
     }
 }

@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="Text"
             android:textColor="@color/colorPrimaryDark"
-            android:id="@+id/product"/>
+            android:id="@+id/productName"/>
         <TextView
             android:textSize="16dp"
             android:paddingRight="10dp"
@@ -46,7 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product"
+            android:layout_below="@+id/productName"
             android:id="@+id/weight"
             android:textColor="@color/colorPrimaryDark"
             android:text="0"/>
@@ -72,28 +72,28 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
             android:textColor="@color/colorPrimaryDark"
-            android:id="@+id/textView1" />
+            android:id="@+id/productProtein" />
         <TextView
             android:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
             android:textColor="@color/colorPrimaryDark"
-            android:id="@+id/textView2" />
+            android:id="@+id/productFat" />
         <TextView
             android:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
             android:textColor="@color/colorPrimaryDark"
-            android:id="@+id/textView3" />
+            android:id="@+id/productCarb" />
         <TextView
             android:text="0%"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
             android:textColor="@color/colorPrimaryDark"
-            android:id="@+id/textView4" />
+            android:id="@+id/productRci" />
             
         <ImageButton
             android:background="@color/mtrl_btn_transparent_bg_color"

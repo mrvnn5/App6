@@ -35,6 +35,10 @@ namespace App6.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             requestService = RequestService.getInstance();
+            if (requestService == null)
+            {
+                StartActivity(typeof(EnterActivity));
+            }
 
             DateTime currentDate = requestService.User.BirthDate;
             

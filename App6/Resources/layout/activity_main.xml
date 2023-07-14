@@ -11,7 +11,7 @@
         layout="@layout/toolbar" />
     
     <Toolbar
-        android:id="@+id/toolbar1"
+        android:id="@+id/bguToolbar"
         android:minHeight="25px"
         android:minWidth="25px"
         android:background="@color/bottomToolBar"
@@ -118,7 +118,7 @@
                 <TextView
                 android:layout_below="@+id/textView5"
                 android:layout_toRightOf="@+id/textView4"
-                    android:id="@+id/proteinsText"
+                    android:id="@+id/caloriesText"
                     android:gravity="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="0"
@@ -134,7 +134,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/main_content"
-        android:layout_below="@id/toolbar1">
+        android:layout_below="@id/bguToolbar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:minWidth="25px"

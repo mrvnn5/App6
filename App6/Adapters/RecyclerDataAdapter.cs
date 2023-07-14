@@ -2,13 +2,18 @@
 using Android.Widget;
 using AndroidX.CardView.Widget;
 using AndroidX.RecyclerView.Widget;
+using App6.Models;
+using App6.Singleton;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace App6.Adapters
 {
     public class RecyclerDataAdapter : RecyclerView.Adapter
     {
+        private RequestService requestService;
+
         public List<MealParentItem> mealParentItems;
         public override int ItemCount
         { 
@@ -21,13 +26,40 @@ namespace App6.Adapters
             MealViewHolder vh = holder as MealViewHolder;
             vh.ParentName.Text = mealParentItem.getParentName();
             vh.ParentImage.SetImageResource(mealParentItem.getImageId());
-            //
+
+            double tProtein = 0, tFat = 0, tCarb = 0, tCal = 0;
+            int tRci = 0;
 
             for (int i = 0; i < mealParentItem.getChildDataItems().Count; i++)
             {
                 View currentView = (View)vh.linearLayout_childItems.GetChildAt(i);
-                currentView.FindViewById<TextView>(Resource.Id.product).Text = mealParentItem.getChildDataItems()[i].Id.ToString();
+                Product product = requestService.Products
+                    .FirstOrDefault(p => p.Id == mealParentItem.getChildDataItems()[i].ProductId);
+                currentView.FindViewById<TextView>(Resource.Id.productName).Text = product.Name;
+
+                double cal = product.Kcal * mealParentItem.getChildDataItems()[i].Weight / 100;
+                tCal += cal;
+                currentView.FindViewById<TextView>(Resource.Id.cal).Text = cal.ToString();
+
                 currentView.FindViewById<TextView>(Resource.Id.weight).Text = mealParentItem.getChildDataItems()[i].Weight.ToString() + " г";
+
+                double protein = product.GetProtein() * mealParentItem.getChildDataItems()[i].Weight / 100;
+                tProtein += protein;
+                currentView.FindViewById<TextView>(Resource.Id.productProtein).Text = protein.ToString();
+
+                double fat = product.GetFat() * mealParentItem.getChildDataItems()[i].Weight / 100;
+                tFat += fat;
+                currentView.FindViewById<TextView>(Resource.Id.productFat).Text = fat.ToString();
+
+                double carb = product.GetCarb() * mealParentItem.getChildDataItems()[i].Weight / 100;
+                tCarb += carb;
+                currentView.FindViewById<TextView>(Resource.Id.productCarb).Text = carb.ToString();
+
+                int rci = (int)Math.Round(
+                    (product.Kcal * mealParentItem.getChildDataItems()[i].Weight / 100)
+                    / requestService.GetRCI() * 100);
+                tRci += rci;
+                currentView.FindViewById<TextView>(Resource.Id.productRci).Text = rci + "%";
             }
 
             int noOfChildTextViews = vh.linearLayout_childItems.ChildCount;
@@ -46,10 +78,33 @@ namespace App6.Adapters
                     currentView.Visibility = ViewStates.Gone;
                 }
             }
+
+            /*double tProtein = requestService.Products
+                .Where(p => mealParentItem.getChildDataItems().Exists(f => f.ProductId == p.Id))
+                .Sum(p => p.GetProtein());
+            vh.TotalMealProtein.Text = tProtein.ToString();
+
+            double tFat = requestService.Products
+                .Where(p => mealParentItem.getChildDataItems().Exists(f => f.ProductId == p.Id))
+                .Sum(p => p.GetFat());
+            vh.TotalMealFat.Text = tFat.ToString();
+
+            double tCarb = requestService.Products
+                .Where(p => mealParentItem.getChildDataItems().Exists(f => f.ProductId == p.Id))
+                .Sum(p => p.GetCarb());
+            vh.TotalMealCarb.Text = tCarb.ToString();*/
+
+
+            vh.TotalMealProtein.Text = tProtein.ToString();
+            vh.TotalMealFat.Text = tFat.ToString();
+            vh.TotalMealCarb.Text = tCarb.ToString();
+            vh.TotalMealRci.Text = tRci + "%";
+            vh.TotalMealCal.Text = tCal.ToString() + "\nКкал";
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
+            requestService = RequestService.getInstance();
             View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.meal_item, parent, false);
             return new MealViewHolder(itemView, mealParentItems);
         }
@@ -66,6 +121,11 @@ namespace App6.Adapters
         private Android.Content.Context context;
         public LinearLayout linearLayout_childItems;
         public TextView ParentName { get; private set; }
+        public TextView TotalMealProtein { get; private set; }
+        public TextView TotalMealFat { get; private set; }
+        public TextView TotalMealCarb { get; private set; }
+        public TextView TotalMealRci { get; private set; }
+        public TextView TotalMealCal { get; private set; }
         public ImageView ParentImage { get; private set; }
         public ImageView ExpandButton { get; private set; }
         public MealViewHolder(View itemView, List<MealParentItem> mealParentItems) : base(itemView)
@@ -73,9 +133,14 @@ namespace App6.Adapters
             context = itemView.Context;
             this.mealParentItems = mealParentItems;
             linearLayout_childItems = itemView.FindViewById<LinearLayout>(Resource.Id.ll_child_items);
-            ParentName = itemView.FindViewById<LinearLayout>(Resource.Id.linearLayoutHTop).FindViewById<TextView>(Resource.Id.tv_parentName);
-            ParentImage = itemView.FindViewById<LinearLayout>(Resource.Id.linearLayoutHTop).FindViewById<ImageView>(Resource.Id.imageView);
+            ParentName = itemView.FindViewById<RelativeLayout>(Resource.Id.linearLayoutHTop).FindViewById<TextView>(Resource.Id.tv_parentName);
+            ParentImage = itemView.FindViewById<RelativeLayout>(Resource.Id.linearLayoutHTop).FindViewById<ImageView>(Resource.Id.imageView);
             ExpandButton = itemView.FindViewById<LinearLayout>(Resource.Id.linearLayoutHBot).FindViewById<ImageView>(Resource.Id.expandButton);
+            TotalMealProtein = itemView.FindViewById<LinearLayout>(Resource.Id.linearLayoutHBot).FindViewById<TextView>(Resource.Id.totalMealProtein);
+            TotalMealFat = itemView.FindViewById<LinearLayout>(Resource.Id.linearLayoutHBot).FindViewById<TextView>(Resource.Id.totalMealFat);
+            TotalMealCarb = itemView.FindViewById<LinearLayout>(Resource.Id.linearLayoutHBot).FindViewById<TextView>(Resource.Id.totalMealCarb);
+            TotalMealRci = itemView.FindViewById<LinearLayout>(Resource.Id.linearLayoutHBot).FindViewById<TextView>(Resource.Id.totalMealRci);
+            TotalMealCal = itemView.FindViewById<RelativeLayout>(Resource.Id.linearLayoutHTop).FindViewById<TextView>(Resource.Id.tCal);
 
 
             linearLayout_childItems.Visibility = ViewStates.Gone;

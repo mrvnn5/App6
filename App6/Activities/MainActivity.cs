@@ -28,9 +28,21 @@ namespace App6.Activities
         private RecyclerView.LayoutManager mLayoutManager;
         private ImageButton userButton;
 
+        private TextView proteinText;
+        private TextView fatText;
+        private TextView carbText;
+        private TextView rciText;
+        private TextView calText;
+        private TextView calUsedTextView;
+        private TextView calLeftTextView;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             requestService = RequestService.getInstance();
+            if (requestService == null)
+            {
+                StartActivity(typeof(EnterActivity));
+            }
 
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -39,6 +51,14 @@ namespace App6.Activities
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetActionBar(toolbar);
             ActionBar.Title = "";
+
+            proteinText = FindViewById<TextView>(Resource.Id.proteinText);
+            fatText = FindViewById<TextView>(Resource.Id.fatText);
+            carbText = FindViewById<TextView>(Resource.Id.carbText);
+            rciText = FindViewById<TextView>(Resource.Id.rciText);
+            calText = FindViewById<TextView>(Resource.Id.caloriesText);
+            calUsedTextView = FindViewById<TextView>(Resource.Id.calUsedTextView);
+            calLeftTextView = FindViewById<TextView>(Resource.Id.calLeftTextView);
 
             userButton = FindViewById<ImageButton>(Resource.Id.userButton);
 
@@ -101,6 +121,28 @@ namespace App6.Activities
 
             recyclerDataAdapter = new RecyclerDataAdapter(mealParentItems);
             recyclerView.SetAdapter(recyclerDataAdapter);
+
+            var items = requestService.User.FoodItems
+                .Where(f => f.Date.Date == currentDate.Date).ToList()
+                .Join(requestService.Products, 
+                    f => f.ProductId, 
+                    p => p.Id, 
+                    (f, p) => new { Weight = f.Weight,
+                    Protein = p.GetProtein(), 
+                    Fat = p.GetFat(),
+                    Carb = p.GetCarb(),
+                    Cal = p.Kcal})
+                .ToList();
+
+            proteinText.Text = items.Sum(i => i.Protein * i.Weight / 100).ToString();
+            fatText.Text = items.Sum(i => i.Fat * i.Weight / 100).ToString();
+            carbText.Text = items.Sum(i => i.Carb * i.Weight / 100).ToString();
+            calText.Text = calUsedTextView.Text = items.Sum(i => i.Cal * i.Weight / 100).ToString();
+            rciText.Text = items.Sum(i =>
+                (int)Math.Round(
+                (i.Cal * i.Weight / 100)
+                / requestService.GetRCI() * 100)) + "%";
+            calLeftTextView.Text = (requestService.GetRCI() - items.Sum(i => i.Cal * i.Weight / 100)).ToString();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

@@ -32,6 +32,12 @@ namespace App6.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             requestService = RequestService.getInstance();
+            if(requestService == null)
+            {
+                Toast.MakeText(BaseContext, "Сервер сейчас недоступен\nМы уже работаем над этим", ToastLength.Long).Show();
+                base.OnCreate(savedInstanceState);
+                return;
+            }
 
             if (requestService.User != null)
             {

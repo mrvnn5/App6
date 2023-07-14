@@ -16,52 +16,60 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
         android:background="@color/grey"    
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:gravity="center_vertical"
         android:paddingHorizontal="10dp"
         android:id="@+id/linearLayoutHTop">
 
             <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/ic_call_answer"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:paddingHorizontal="5dp"
                 android:id="@+id/imageView" />
             <TextView
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
                 android:text="Text"
                 android:textSize="18dp"
                 android:paddingLeft="5dp"
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.6"
+                android:layout_toRightOf="@+id/imageView"
                 android:textColor="@color/colorPrimaryDark"
                 android:id="@+id/tv_parentName" />
             <TextView
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/addProductButton"
+                android:layout_toRightOf="@+id/tv_parentName"
+                android:layout_centerVertical="true"
+                android:gravity="center"
                 android:text="Text"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.15"
                 android:textColor="@color/colorPrimaryDark"
-                android:id="@+id/textViewS" />
+                android:id="@+id/tCal" />
             <ImageButton
+                android:layout_alignParentRight="true"
+                android:paddingRight="10dp"
+                android:layout_centerVertical="true"
                 android:background="@color/mtrl_btn_transparent_bg_color"
                 android:src="@drawable/round_add_24"
                 android:tint="@color/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.1"
-                android:id="@+id/imageButton1" />
+                android:id="@+id/addProductButton" />
 
 
 
-        </LinearLayout>
+        </RelativeLayout>
         <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
@@ -80,28 +88,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.24"
                 android:textColor="@color/colorPrimaryDark"
-                android:id="@+id/textView1" />
+                android:id="@+id/totalMealProtein" />
             <TextView
                 android:text="0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.24"
                 android:textColor="@color/colorPrimaryDark"
-                android:id="@+id/textView2" />
+                android:id="@+id/totalMealFat" />
             <TextView
                 android:text="0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.24"
                 android:textColor="@color/colorPrimaryDark"
-                android:id="@+id/textView3" />
+                android:id="@+id/totalMealCarb" />
             <TextView
                 android:text="0%"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.24"
                 android:textColor="@color/colorPrimaryDark"
-                android:id="@+id/textView4" />
+                android:id="@+id/totalMealRci" />
             <ImageView
                 android:background="@color/mtrl_btn_transparent_bg_color"
                 android:src="@drawable/round_expand_more_24"

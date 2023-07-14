@@ -25,7 +25,7 @@ namespace App6.Singleton
         private string TCoYBServerURL;
         private string ProductBaseURL;
         public AppUser? User;
-        List<Product> Products;
+        public List<Product> Products = null;
 
         protected RequestService()
         {
@@ -38,9 +38,11 @@ namespace App6.Singleton
                delegate { return true; }
             );
 
+            LoadProducts();
+
             Task<UserToken> task = GetToken();
             task.Wait();
-            if(task.Result != null)
+            if (task.Result != null)
                 GetUser(task.Result);
         }
 
@@ -48,6 +50,8 @@ namespace App6.Singleton
         {
             if (instance == null)
                 instance = new RequestService();
+
+            if (instance.Products == null || instance.Products.Count == 0) return null;
             return instance;
         }
 
@@ -88,7 +92,7 @@ namespace App6.Singleton
             try
             {
                 UserToken userToken = new UserToken()
-                { 
+                {
                     Username = await SecureStorage.GetAsync("username"),
                     AccessToken = await SecureStorage.GetAsync("accessToken"),
                     ExpiredAt = Convert.ToDateTime(await SecureStorage.GetAsync("tokenExpiredAt"))
@@ -99,6 +103,44 @@ namespace App6.Singleton
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        private bool LoadProducts()
+        {
+            var request = HttpWebRequest.Create(ProductBaseURL);
+            request.Method = "GET";
+
+            request.ContentType = "application/json";
+
+            HttpWebResponse response;
+
+            try
+            {
+                response = request.GetResponse() as HttpWebResponse;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            using (response)
+            {
+                if (response.StatusCode != HttpStatusCode.OK)
+                    return false;
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                {
+                    var content = reader.ReadToEnd();
+                    if (string.IsNullOrWhiteSpace(content))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        Products = JsonConvert.DeserializeObject<List<Product>>(content);
+                        return true;
+                    }
+                }
             }
         }
 
