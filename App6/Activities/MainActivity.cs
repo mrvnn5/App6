@@ -19,12 +19,13 @@ namespace App6.Activities
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait, NoHistory = true)]
     public class MainActivity : Activity
     {
-        private RequestService requestService;
+        private RequestService RequestService;
+        private ProductService ProductService;
 
-        private RecyclerDataAdapter recyclerDataAdapter;
+        private MealRecyclerAdapter recyclerDataAdapter;
         private RecyclerView recyclerView;
         private TextView dateTextView;
-        private DateTime currentDate = DateTime.Today;
+        public DateTime currentDate { get; private set; } = DateTime.Today;
         private RecyclerView.LayoutManager mLayoutManager;
         private ImageButton userButton;
 
@@ -38,8 +39,8 @@ namespace App6.Activities
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            requestService = RequestService.getInstance();
-            if (requestService == null)
+            RequestService = RequestService.GetInstance();
+            if (RequestService.Status != RequestService.StatusCode.SUCCESS)
             {
                 StartActivity(typeof(EnterActivity));
             }
@@ -67,8 +68,9 @@ namespace App6.Activities
 
             mLayoutManager = new LinearLayoutManager(this);
             recyclerView.SetLayoutManager(mLayoutManager);
-
-            UpdateView();
+            recyclerDataAdapter = new MealRecyclerAdapter(this);
+            recyclerView.SetAdapter(recyclerDataAdapter);
+            UpdateTotal();
 
             userButton.Click += (sender, e) =>
             {
@@ -82,7 +84,8 @@ namespace App6.Activities
                 DatePickerFragment frag = DatePickerFragment.NewInstance(currentDate, delegate (DateTime time)
                 {
                     currentDate = time.Date;
-                    UpdateView();
+                    UpdateTotal();
+                    recyclerDataAdapter.NotifyDataSetChanged();
                     if (time.Date == DateTime.Now.Date) 
                     {
                         dateTextView.Text = "Сегодня";
@@ -101,48 +104,20 @@ namespace App6.Activities
             };
         }
 
-        public void UpdateView()
+        public void UpdateTotal()
         {
-            List<MealParentItem> mealParentItems = new List<MealParentItem>
-            {
-                new MealParentItem("Завтрак", 
-                        requestService.User.FoodItems.Where(f => f.Date.Date == currentDate && f.MealType == Models.MealType.Breakfast).ToList(), 
-                        Resource.Drawable.morning),
-                new MealParentItem("Обед",
-                        requestService.User.FoodItems.Where(f => f.Date.Date == currentDate && f.MealType == Models.MealType.Lunch).ToList(),
-                        Resource.Drawable.day),
-                new MealParentItem("Ужин",
-                        requestService.User.FoodItems.Where(f => f.Date.Date == currentDate && f.MealType == Models.MealType.Dinner).ToList(),
-                        Resource.Drawable.night),
-                new MealParentItem("Перекус",
-                        requestService.User.FoodItems.Where(f => f.Date.Date == currentDate && f.MealType == Models.MealType.Snack).ToList(),
-                        Resource.Drawable.other)
-            };
+            var items = RequestService.User.FoodItems
+                .Where(f => f.Date.Date == currentDate.Date).ToList();
 
-            recyclerDataAdapter = new RecyclerDataAdapter(mealParentItems);
-            recyclerView.SetAdapter(recyclerDataAdapter);
-
-            var items = requestService.User.FoodItems
-                .Where(f => f.Date.Date == currentDate.Date).ToList()
-                .Join(requestService.Products, 
-                    f => f.ProductId, 
-                    p => p.Id, 
-                    (f, p) => new { Weight = f.Weight,
-                    Protein = p.GetProtein(), 
-                    Fat = p.GetFat(),
-                    Carb = p.GetCarb(),
-                    Cal = p.Kcal})
-                .ToList();
-
-            proteinText.Text = items.Sum(i => i.Protein * i.Weight / 100).ToString();
-            fatText.Text = items.Sum(i => i.Fat * i.Weight / 100).ToString();
-            carbText.Text = items.Sum(i => i.Carb * i.Weight / 100).ToString();
-            calText.Text = calUsedTextView.Text = items.Sum(i => i.Cal * i.Weight / 100).ToString();
+            proteinText.Text = items.Sum(i => i.Product.GetProtein() * i.Weight / 100).ToString();
+            fatText.Text = items.Sum(i => i.Product.GetFat() * i.Weight / 100).ToString();
+            carbText.Text = items.Sum(i => i.Product.GetCarb() * i.Weight / 100).ToString();
+            calText.Text = calUsedTextView.Text = items.Sum(i => i.Product.Kcal * i.Weight / 100).ToString();
             rciText.Text = items.Sum(i =>
                 (int)Math.Round(
-                (i.Cal * i.Weight / 100)
-                / requestService.GetRCI() * 100)) + "%";
-            calLeftTextView.Text = (requestService.GetRCI() - items.Sum(i => i.Cal * i.Weight / 100)).ToString();
+                (i.Product.Kcal * i.Weight / 100)
+                / RequestService.GetRCI() * 100)) + "%";
+            calLeftTextView.Text = (RequestService.GetRCI() - items.Sum(i => i.Product.Kcal * i.Weight / 100)).ToString();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

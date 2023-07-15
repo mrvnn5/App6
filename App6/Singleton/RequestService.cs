@@ -15,17 +15,27 @@ using Newtonsoft.Json;
 using Xamarin.Essentials;
 using System.Threading.Tasks;
 using System;
+using App6.Activities;
 
 namespace App6.Singleton
 {
     public class RequestService
     {
+        public StatusCode Status { get; private set; }
         private static RequestService instance;
+        private ProductService productService;
 
         private string TCoYBServerURL;
         private string ProductBaseURL;
-        public AppUser? User;
-        public List<Product> Products = null;
+        public AppUser User;
+
+        public enum StatusCode
+        {
+            SUCCESS = 0,
+            JSON_LOAD_ERROR = 1,
+            LOCAL_TOKEN_ERROR = 2,
+            BAD_TOKEN = 3
+        }
 
         protected RequestService()
         {
@@ -38,21 +48,41 @@ namespace App6.Singleton
                delegate { return true; }
             );
 
-            LoadProducts();
+            if(!LoadProducts())
+            {
+                Status = StatusCode.JSON_LOAD_ERROR; 
+                return;
+            }
 
             Task<UserToken> task = GetToken();
             task.Wait();
-            if (task.Result != null)
-                GetUser(task.Result);
+            if (task.Result == null)
+            {
+                Status = StatusCode.LOCAL_TOKEN_ERROR; 
+                return;
+            }
+
+            if(!GetUser(task.Result))
+            {
+                Status = StatusCode.BAD_TOKEN;
+                return;
+            }
+
+            Status = StatusCode.SUCCESS;
         }
 
-        public static RequestService getInstance()
+        public static RequestService GetInstance()
         {
             if (instance == null)
                 instance = new RequestService();
-
-            if (instance.Products == null || instance.Products.Count == 0) return null;
             return instance;
+        }
+
+        public void LogOut()
+        {
+            ClearToken().Wait();
+            User = null;
+            Status = RequestService.StatusCode.BAD_TOKEN;
         }
 
         public async Task<bool> SetToken()
@@ -137,7 +167,8 @@ namespace App6.Singleton
                     }
                     else
                     {
-                        Products = JsonConvert.DeserializeObject<List<Product>>(content);
+                        productService = ProductService.getInstance(JsonConvert.DeserializeObject<List<Product>>(content));
+                        if (productService == null) return false;
                         return true;
                     }
                 }
@@ -188,6 +219,7 @@ namespace App6.Singleton
                     {
                         User = JsonConvert.DeserializeObject<AppUser>(content);
                         SetToken().Wait();
+                        Status = StatusCode.SUCCESS;
                         return true;
                     }
                 }

@@ -20,7 +20,7 @@ namespace App6.Activities
     [Activity(Label = "@string/app_name", Theme = "@style/MyTheme.Splash", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait, NoHistory = true)]
     public class EnterActivity : Activity
     {
-        private RequestService requestService;
+        private RequestService RequestService;
 
         private bool isSignIn = true;
         private EditText username;
@@ -31,15 +31,15 @@ namespace App6.Activities
         private Button signUp;
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            requestService = RequestService.getInstance();
-            if(requestService == null)
+            RequestService = RequestService.GetInstance();
+            if(RequestService.Status == RequestService.StatusCode.JSON_LOAD_ERROR)
             {
                 Toast.MakeText(BaseContext, "Сервер сейчас недоступен\nМы уже работаем над этим", ToastLength.Long).Show();
                 base.OnCreate(savedInstanceState);
                 return;
             }
 
-            if (requestService.User != null)
+            if (RequestService.Status == RequestService.StatusCode.SUCCESS)
             {
                 StartActivity(typeof(MainActivity));
                 OverridePendingTransition(0, 0);
@@ -69,14 +69,16 @@ namespace App6.Activities
             signIn.Enabled = false;
             if (isSignIn)
             {
-                if (requestService.GetUser(username.Text, password.Text))
+                if (RequestService.GetUser(username.Text, password.Text))
                 {
                     StartActivity(typeof(MainActivity));
+                    signIn.Enabled = true;
                     return;
                 } 
                 else
                 {
                     Toast.MakeText(BaseContext, "Неправильный никнейм или пароль", ToastLength.Long).Show();
+                    signIn.Enabled = true;
                     return;
                 }
             }
@@ -84,9 +86,10 @@ namespace App6.Activities
             if(password.Text != passwordRepeat.Text)
             {
                 Toast.MakeText(BaseContext, "Пароли не совпадают", ToastLength.Long).Show();
+                signIn.Enabled = true;
                 return;
             } 
-            else if (requestService.CreateUser(username.Text, password.Text))
+            else if (RequestService.CreateUser(username.Text, password.Text))
             {
                 Intent intentUser = new Intent(BaseContext, typeof(UserActivity));
                 intentUser.PutExtra("isSignIn", isSignIn);
@@ -94,7 +97,7 @@ namespace App6.Activities
                 OverridePendingTransition(0, 0);
             }
             else Toast.MakeText(BaseContext, "Пользователь с таким никнеймом уже существует", ToastLength.Long).Show();
-            signIn.Enabled = false;
+            signIn.Enabled = true;
         }
 
         public void ChangeIsSignIn()

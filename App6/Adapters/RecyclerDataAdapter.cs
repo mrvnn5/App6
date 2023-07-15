@@ -13,6 +13,7 @@ namespace App6.Adapters
     public class RecyclerDataAdapter : RecyclerView.Adapter
     {
         private RequestService requestService;
+        private ProductService productService;
 
         public List<MealParentItem> mealParentItems;
         public override int ItemCount
@@ -33,7 +34,7 @@ namespace App6.Adapters
             for (int i = 0; i < mealParentItem.getChildDataItems().Count; i++)
             {
                 View currentView = (View)vh.linearLayout_childItems.GetChildAt(i);
-                Product product = requestService.Products
+                Product product = productService.Products
                     .FirstOrDefault(p => p.Id == mealParentItem.getChildDataItems()[i].ProductId);
                 currentView.FindViewById<TextView>(Resource.Id.productName).Text = product.Name;
 
@@ -104,7 +105,7 @@ namespace App6.Adapters
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            requestService = RequestService.getInstance();
+            requestService = RequestService.GetInstance();
             View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.meal_item, parent, false);
             return new MealViewHolder(itemView, mealParentItems);
         }

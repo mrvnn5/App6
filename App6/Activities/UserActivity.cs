@@ -14,7 +14,7 @@ namespace App6.Activities
     [Activity(Label = "UserActivity", ScreenOrientation = ScreenOrientation.Portrait, NoHistory = true)]
     public class UserActivity : Activity
     {
-        private RequestService requestService;
+        private RequestService RequestService;
 
         private TextView userGreeting;
         private EditText editHeight;
@@ -34,13 +34,13 @@ namespace App6.Activities
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            requestService = RequestService.getInstance();
-            if (requestService == null)
+            RequestService = RequestService.GetInstance();
+            if (RequestService.Status != RequestService.StatusCode.SUCCESS)
             {
                 StartActivity(typeof(EnterActivity));
             }
 
-            DateTime currentDate = requestService.User.BirthDate;
+            DateTime currentDate = RequestService.User.BirthDate;
             
             base.OnCreate(savedInstanceState); 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -62,21 +62,21 @@ namespace App6.Activities
 
             progressBar.Visibility = ViewStates.Gone;
 
-            userGreeting.Text = "Привет, " + requestService.User.Username + "!";
+            userGreeting.Text = "Привет, " + RequestService.User.Username + "!";
 
             if (Intent.GetBooleanExtra("isSignIn", true))
             {
                 SetChageMode(false);
                 homeButton.Visibility = ViewStates.Visible;
                 logOutButton.Visibility = ViewStates.Visible;
-                editHeight.Text = requestService.User.Height.ToString();
-                editWeight.Text = requestService.User.Weight.ToString();
-                editAge.Text = requestService.User.BirthDate.Date.ToString("dd/MM/yyyy");
-                spinnerGender.SetSelection((int)requestService.User.Sex);
-                spinnerActivity.SetSelection((int)requestService.User.Activity);
-                spinnerPlan.SetSelection((int)requestService.User.Plan);
+                editHeight.Text = RequestService.User.Height.ToString();
+                editWeight.Text = RequestService.User.Weight.ToString();
+                editAge.Text = RequestService.User.BirthDate.Date.ToString("dd/MM/yyyy");
+                spinnerGender.SetSelection((int)RequestService.User.Sex);
+                spinnerActivity.SetSelection((int)RequestService.User.Activity);
+                spinnerPlan.SetSelection((int)RequestService.User.Plan);
 
-                rciValue.Text = requestService.GetRCI().ToString();
+                rciValue.Text = RequestService.GetRCI().ToString();
             }
             else
             {
@@ -90,20 +90,18 @@ namespace App6.Activities
             changeData.Click += (s, e) =>
             {
                 changeData.Enabled = false;
-                changeData.Visibility = ViewStates.Gone;
-                progressBar.Visibility = ViewStates.Visible;
                 if (isChangeMode)
                 {
-                    requestService.User.Height = Convert.ToInt32(editHeight.Text);
-                    requestService.User.Weight = Convert.ToInt32(editWeight.Text);
-                    requestService.User.BirthDate = DateTime.ParseExact(editAge.Text, "dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                    requestService.User.Sex = (Models.Sex)spinnerGender.SelectedItemPosition;
-                    requestService.User.Activity = (Models.Activity)spinnerActivity.SelectedItemPosition;
-                    requestService.User.Plan = (Models.Plan)spinnerPlan.SelectedItemPosition;
+                    RequestService.User.Height = Convert.ToInt32(editHeight.Text);
+                    RequestService.User.Weight = Convert.ToInt32(editWeight.Text);
+                    RequestService.User.BirthDate = DateTime.ParseExact(editAge.Text, "dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                    RequestService.User.Sex = (Models.Sex)spinnerGender.SelectedItemPosition;
+                    RequestService.User.Activity = (Models.Activity)spinnerActivity.SelectedItemPosition;
+                    RequestService.User.Plan = (Models.Plan)spinnerPlan.SelectedItemPosition;
 
-                    requestService.UpdateUser();
+                    RequestService.UpdateUser();
 
-                    rciValue.Text = requestService.GetRCI().ToString();
+                    rciValue.Text = RequestService.GetRCI().ToString();
 
                     if (Intent.GetBooleanExtra("isSignIn", true))
                     {
@@ -119,8 +117,6 @@ namespace App6.Activities
                     SetChageMode(true);
                 }
                 changeData.Enabled = true;
-                changeData.Visibility = ViewStates.Gone;
-                progressBar.Visibility = ViewStates.Visible;
             };
 
             homeButton.Click += (s, e) =>
@@ -130,8 +126,7 @@ namespace App6.Activities
 
             logOutButton.Click += (s, e) =>
             {
-                requestService.ClearToken().Wait();
-                requestService.User = null;
+                RequestService.LogOut();
                 StartActivity(typeof(EnterActivity));
             };
 

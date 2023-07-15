@@ -96,6 +96,7 @@
             android:id="@+id/productRci" />
             
         <ImageButton
+            android:id="@+id/deleteProductButton"
             android:background="@color/mtrl_btn_transparent_bg_color"
             android:tint="@android:color/holo_red_light"
             android:src="@drawable/round_delete_outline_24"
