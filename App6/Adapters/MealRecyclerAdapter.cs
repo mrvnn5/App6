@@ -9,18 +9,22 @@ using AndroidX.RecyclerView.Widget;
 using App6.Activities;
 using App6.Models;
 using App6.Singleton;
+using Com.Ajithvgiri.Searchdialog;
 using Org.W3c.Dom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static Android.Content.ClipData;
+using static Android.Icu.Text.Transliterator;
+using static App6.Activities.MainActivity;
 
 namespace App6.Adapters
 {
     public class MealRecyclerAdapter : RecyclerView.Adapter
     {
         private RequestService RequestService;
-        private MainActivity MainActivity;
+        public MainActivity MainActivity;
 
         public MealRecyclerAdapter(MainActivity mainActivity)
         {
@@ -35,11 +39,52 @@ namespace App6.Adapters
             return position;
         }
 
+        public void AddProduct(MealRecyclerAdapterViewHolder vh, FoodItem item, int position)
+        {
+            View currentView = LayoutInflater.FromContext(vh.ItemView.Context).Inflate(Resource.Layout.food_item, vh.FoodItemsLinearLayout, false);
+            vh.FoodItemsLinearLayout.AddView(currentView);
+
+            currentView.FindViewById<TextView>(Resource.Id.productName).Text = item.Product.Name;
+
+            double cal = item.Product.Kcal * item.Weight / 100;
+            currentView.FindViewById<TextView>(Resource.Id.cal).Text = cal.ToString();
+
+            currentView.FindViewById<TextView>(Resource.Id.weight).Text = item.Weight.ToString() + " г";
+
+            currentView.FindViewById<ImageButton>(Resource.Id.deleteProductButton).Click += (s, e) =>
+            {
+                vh.FoodItemsLinearLayout.RemoveView(currentView);
+                RequestService.User.FoodItems.Remove(item);
+                RequestService.UpdateUser();
+                vh.UpdateTotal(MainActivity.currentDate, position);
+                MainActivity.UpdateTotal();
+            };
+
+            double protein = item.Product.GetProtein() * item.Weight / 100;
+            currentView.FindViewById<TextView>(Resource.Id.productProtein).Text = protein.ToString();
+
+            double fat = item.Product.GetFat() * item.Weight / 100;
+            currentView.FindViewById<TextView>(Resource.Id.productFat).Text = fat.ToString();
+
+            double carb = item.Product.GetCarb() * item.Weight / 100;
+            currentView.FindViewById<TextView>(Resource.Id.productCarb).Text = carb.ToString();
+            int rci = (int)Math.Round(
+                (item.Product.Kcal * item.Weight / 100)
+                / RequestService.GetRCI() * 100);
+            currentView.FindViewById<TextView>(Resource.Id.productRci).Text = rci + "%";
+        }
+
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             MealRecyclerAdapterViewHolder vh = holder as MealRecyclerAdapterViewHolder;
             vh.FoodItemsLinearLayout.RemoveAllViews();
             vh.UpdateTotal(MainActivity.currentDate, position);
+            vh.AddProductButton.Click += (s, e) =>
+            {
+                var searchableDialog = new SearchableDialog(MainActivity, ProductService.getInstance().SearchListItems, "Выбор продукта");
+                searchableDialog.OnSearchItemSelected = new SearchItemSelected(this, vh, position);
+                searchableDialog.Show();
+            };
 
             switch (position)
             {
@@ -61,43 +106,10 @@ namespace App6.Adapters
                     break;
             }
 
-            int i = 0;
+            //int i = 0;
             foreach (FoodItem item in RequestService.User.FoodItems.Where(f => f.Date.Date == MainActivity.currentDate.Date && (int)f.MealType == position))
             {
-                View currentView = LayoutInflater.FromContext(vh.ItemView.Context).Inflate(Resource.Layout.food_item, vh.FoodItemsLinearLayout, false);
-                vh.FoodItemsLinearLayout.AddView(currentView);
-
-                currentView.FindViewById<TextView>(Resource.Id.productName).Text = item.Product.Name;
-
-                double cal = item.Product.Kcal * item.Weight / 100;
-                currentView.FindViewById<TextView>(Resource.Id.cal).Text = cal.ToString();
-
-                currentView.FindViewById<TextView>(Resource.Id.weight).Text = item.Weight.ToString() + " г";
-
-                currentView.FindViewById<ImageButton>(Resource.Id.deleteProductButton).Click += (s, e) =>
-                {
-                    vh.FoodItemsLinearLayout.RemoveView(currentView);
-                    RequestService.User.FoodItems.Remove(item);
-                    RequestService.UpdateUser();
-                    vh.UpdateTotal(MainActivity.currentDate, position);
-                    MainActivity.UpdateTotal();
-                };
-
-                double protein = item.Product.GetProtein() * item.Weight / 100;
-                currentView.FindViewById<TextView>(Resource.Id.productProtein).Text = protein.ToString();
-
-                double fat = item.Product.GetFat() * item.Weight / 100;
-                currentView.FindViewById<TextView>(Resource.Id.productFat).Text = fat.ToString();
-
-                double carb = item.Product.GetCarb() * item.Weight / 100;
-                currentView.FindViewById<TextView>(Resource.Id.productCarb).Text = carb.ToString();
-
-                int rci = (int)Math.Round(
-                    (item.Product.Kcal * item.Weight / 100)
-                    / RequestService.GetRCI() * 100);
-                currentView.FindViewById<TextView>(Resource.Id.productRci).Text = rci + "%";
-
-                i++;
+                AddProduct(vh, item, position);
             }
         }
 
@@ -108,7 +120,55 @@ namespace App6.Adapters
         }
     }
 
-    internal class MealRecyclerAdapterViewHolder : RecyclerView.ViewHolder
+    public class SearchItemSelected : Java.Lang.Object, IOnSearchItemSelected
+    {
+        ProductService ProductService;
+        RequestService RequestService;
+        MealRecyclerAdapter adapter;
+        MealRecyclerAdapterViewHolder vh;
+        int position;
+        public void OnClick(int p0, SearchListItem p1)
+        {
+            LinearLayout view = new LinearLayout(adapter.MainActivity);
+            view.SetPadding(60,0,60,0);
+            EditText et = new EditText(adapter.MainActivity);
+            et.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
+            et.InputType = Android.Text.InputTypes.ClassNumber;
+            view.AddView(et);
+            AlertDialog.Builder ad = new AlertDialog.Builder(adapter.MainActivity);
+
+            ad.SetTitle(p1.Title);
+            ad.SetMessage("Укажите вес в граммах");
+            ad.SetPositiveButton("Готово", (s, e) => {
+                int w = -1;
+                if (!int.TryParse(et.Text, out w) || w < 1) return;
+                FoodItem foodItem = new FoodItem(
+                    new Guid(), RequestService.User.Username, p1.Id, int.Parse(et.Text), adapter.MainActivity.currentDate, (MealType)position);
+                RequestService.User.FoodItems.Add(foodItem);
+                RequestService.UpdateUser();
+                adapter.AddProduct(vh, RequestService.User.FoodItems.Last(), position);
+                vh.UpdateTotal(adapter.MainActivity.currentDate, position);
+                adapter.MainActivity.UpdateTotal();
+            });
+            ad.SetView(view);
+            ad.Show();
+
+            
+            //Toast.MakeText(mContext, ProductService.Products.SingleOrDefault(p => p.Id == p1.Id).Name, ToastLength.Long).Show();
+        }
+
+        public SearchItemSelected(MealRecyclerAdapter adapter, MealRecyclerAdapterViewHolder vh, int position)
+        {
+            ProductService = ProductService.getInstance();
+            RequestService = RequestService.GetInstance();
+
+            this.vh = vh;
+            this.position = position;
+            this.adapter = adapter;
+        }
+    }
+
+    public class MealRecyclerAdapterViewHolder : RecyclerView.ViewHolder
     {
         private RequestService RequestService;
 
@@ -121,7 +181,7 @@ namespace App6.Adapters
         public TextView TotalMealCal { get; private set; }
         public ImageView ParentImage { get; private set; }
         public ImageView ExpandButton { get; private set; }
-
+        public ImageButton AddProductButton { get; private set; }
         public MealRecyclerAdapterViewHolder(View itemView) : base(itemView)
         {
             RequestService = RequestService.GetInstance();
@@ -135,6 +195,7 @@ namespace App6.Adapters
             TotalMealCarb = itemView.FindViewById<TextView>(Resource.Id.totalMealCarb);
             TotalMealRci = itemView.FindViewById<TextView>(Resource.Id.totalMealRci);
             TotalMealCal = itemView.FindViewById<TextView>(Resource.Id.tCal);
+            AddProductButton = itemView.FindViewById<ImageButton>(Resource.Id.addProductButton);
 
             FoodItemsLinearLayout.Visibility = ViewStates.Gone;
 

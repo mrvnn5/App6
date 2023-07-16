@@ -3,12 +3,15 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Android.Text;
 using Android.Views;
 using Android.Widget;
+using App6.Adapters;
 using App6.Singleton;
 using RestSharp;
 using RestSharp.Authenticators;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -57,6 +60,9 @@ namespace App6.Activities
             signIn = FindViewById<Button>(Resource.Id.signInButton);
             signUp = FindViewById<Button>(Resource.Id.signUpButton);
             passwordRepeatText = FindViewById<TextView>(Resource.Id.repeatpass);
+
+            username.SetFilters(new IInputFilter[] { new InputFilter(InputFilter.InputType.Username) });
+            password.SetFilters(new IInputFilter[] { new InputFilter(InputFilter.InputType.Username) });
 
             signUp.Click += (sender, args) => ChangeIsSignIn();
             signIn.Click += (sender, args) => Continue();

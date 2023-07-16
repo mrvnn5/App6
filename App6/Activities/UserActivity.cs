@@ -32,6 +32,7 @@ namespace App6.Activities
 
         private bool isChangeMode;
 
+        [Obsolete]
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestService = RequestService.GetInstance();

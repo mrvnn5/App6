@@ -34,18 +34,18 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:text="Никнейм"/>
 
-            
-                    <EditText
-                        android:paddingVertical="3dp"
-                        android:id="@+id/usernameEditText"
-                        android:inputType="textPersonName"
-                        android:layout_width="180dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="20dp"
-                        android:layout_toRightOf="@+id/username"
-                        android:maxLength="20"
-                        android:background="@drawable/roundedborder_edittext"/>
+
+        <EditText
+            android:paddingVertical="3dp"
+            android:id="@+id/usernameEditText"
+            android:inputType="textPersonName|textNoSuggestions"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_toRightOf="@+id/username"
+            android:maxLength="20"
+            android:background="@drawable/roundedborder_edittext"/>
                 
 
             
@@ -61,17 +61,17 @@
                                 android:textColor="@color/colorPrimaryDark"
                                 android:text="Пароль"/>
 
-                        <EditText
-                                android:paddingVertical="3dp"
-                                android:id="@+id/passEditText"
-                                android:inputType="textPassword"
-                                android:layout_width="180dp"
-                                android:layout_height="wrap_content" 
-                                android:layout_below="@+id/username"
-                                android:layout_toRightOf="@+id/username"
-                                android:textSize="20dp"
-                                android:gravity="center"
-                                android:background="@drawable/roundedborder_edittext"/>
+        <EditText
+            android:paddingVertical="3dp"
+            android:id="@+id/passEditText"
+            android:inputType="textPassword|textNoSuggestions"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/username"
+            android:layout_toRightOf="@+id/username"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:background="@drawable/roundedborder_edittext"/>
 
                         <TextView
                                 android:visibility="invisible"

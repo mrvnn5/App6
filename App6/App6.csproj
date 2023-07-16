@@ -35,7 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidLinkMode>Full</AndroidLinkMode>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
@@ -66,9 +66,8 @@
   <ItemGroup>
     <Compile Include="Activities\EnterActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="Adapters\MealParentItem.cs" />
+    <Compile Include="Adapters\InputFilter.cs" />
     <Compile Include="Adapters\MealRecyclerAdapter.cs" />
-    <Compile Include="Adapters\RecyclerDataAdapter.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\FoodItem.cs" />
     <Compile Include="Models\Product.cs" />
@@ -147,6 +146,9 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Search.Dialog">
+      <Version>1.1.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\food_item.xml">
@@ -1109,6 +1111,11 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\spinnerStyleSelected.xml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\add_product.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

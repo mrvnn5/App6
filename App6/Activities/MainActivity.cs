@@ -9,10 +9,10 @@ using AndroidX.AppCompat.App;
 using AndroidX.RecyclerView.Widget;
 using App6.Adapters;
 using App6.Singleton;
+using Com.Ajithvgiri.Searchdialog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace App6.Activities
 {
@@ -20,7 +20,7 @@ namespace App6.Activities
     public class MainActivity : Activity
     {
         private RequestService RequestService;
-        private ProductService ProductService;
+        ProductService ProductService;
 
         private MealRecyclerAdapter recyclerDataAdapter;
         private RecyclerView recyclerView;
@@ -37,9 +37,12 @@ namespace App6.Activities
         private TextView calUsedTextView;
         private TextView calLeftTextView;
 
+        [Obsolete]
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestService = RequestService.GetInstance();
+            ProductService = ProductService.getInstance();
+
             if (RequestService.Status != RequestService.StatusCode.SUCCESS)
             {
                 StartActivity(typeof(EnterActivity));
@@ -147,8 +150,7 @@ namespace App6.Activities
             return frag;
         }
 
-
-
+        [Obsolete]
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
             

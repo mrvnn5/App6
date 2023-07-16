@@ -95,7 +95,7 @@ namespace App6.Singleton
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -111,7 +111,7 @@ namespace App6.Singleton
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -130,7 +130,7 @@ namespace App6.Singleton
 
                 return userToken;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -149,7 +149,7 @@ namespace App6.Singleton
             {
                 response = request.GetResponse() as HttpWebResponse;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -199,7 +199,7 @@ namespace App6.Singleton
             {
                 response = request.GetResponse() as HttpWebResponse;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using App6.Models;
+using Com.Ajithvgiri.Searchdialog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,16 @@ namespace App6.Singleton
     public class ProductService
     {
         private static ProductService instance;
+        public List<SearchListItem> SearchListItems { get; private set; }
 
         public List<Product> Products;
 
-        public ProductService(List<Product> products)
+        private ProductService(List<Product> products)
         {
             Products = products;
+            SearchListItems = new List<SearchListItem>();
+            Products.ForEach(p => SearchListItems.Add(
+                new SearchListItem(p.Id, p.Name + " (" + p.Kcal + " Ккал б-" + p.GetProtein() + " ж-" + p.GetFat() + " у-" + p.GetCarb() + ")")));
         }
 
         public static ProductService getInstance(List<Product> products = null)
