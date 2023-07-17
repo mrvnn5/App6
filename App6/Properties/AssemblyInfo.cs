@@ -6,8 +6,12 @@ using Android.App;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("App6")]
-[assembly: Application(Icon = "@drawable/icon")]
+[assembly: AssemblyTitle("TC")]
+#if DEBUG
+[assembly: Application(Icon = "@drawable/icon", Debuggable = true)]
+#else
+[assembly: Application(Icon = "@drawable/icon", Debuggable=false)]
+#endif
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
@@ -16,12 +20,6 @@ using Android.App;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-#if DEBUG
-[assembly: Application(Debuggable = true)]
-#else
-[assembly: Application(Debuggable=false)]
-#endif
-
 
 // Version information for an assembly consists of the following four values:
 //
