@@ -68,28 +68,28 @@
 
         <TextView
             android:text="0"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
             android:textColor="@color/colorPrimaryDark"
             android:id="@+id/productProtein" />
         <TextView
             android:text="0"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
             android:textColor="@color/colorPrimaryDark"
             android:id="@+id/productFat" />
         <TextView
             android:text="0"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
             android:textColor="@color/colorPrimaryDark"
             android:id="@+id/productCarb" />
         <TextView
             android:text="0%"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
             android:textColor="@color/colorPrimaryDark"
@@ -100,9 +100,9 @@
             android:background="@color/mtrl_btn_transparent_bg_color"
             android:tint="@android:color/holo_red_light"
             android:src="@drawable/round_delete_outline_24"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.01"/>
+            android:layout_weight="0.04"/>
 
     </LinearLayout>
 </LinearLayout>

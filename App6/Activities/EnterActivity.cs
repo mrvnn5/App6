@@ -35,12 +35,14 @@ namespace App6.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestService = RequestService.GetInstance();
-            if(RequestService.Status == RequestService.StatusCode.JSON_LOAD_ERROR)
+            if(RequestService.Status == RequestService.StatusCode.JSON_LOAD_ERROR || RequestService.Status == RequestService.StatusCode.LOCAL_TOKEN_ERROR)
             {
                 Toast.MakeText(BaseContext, "Сервер сейчас недоступен\nМы уже работаем над этим", ToastLength.Long).Show();
                 base.OnCreate(savedInstanceState);
                 return;
             }
+
+
 
             if (RequestService.Status == RequestService.StatusCode.SUCCESS)
             {

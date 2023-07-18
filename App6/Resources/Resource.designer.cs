@@ -14,7 +14,7 @@ namespace App6
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.2.0.99")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.3.0.26")]
 	public partial class Resource
 	{
 		
@@ -14726,50 +14726,53 @@ namespace App6
 			// aapt resource value: 0x7F090201
 			public const int userGreeting = 2131296769;
 			
-			// aapt resource value: 0x7F090202
-			public const int username = 2131296770;
-			
 			// aapt resource value: 0x7F090203
-			public const int usernameEditText = 2131296771;
+			public const int username = 2131296771;
 			
 			// aapt resource value: 0x7F090204
-			public const int view_offset_helper = 2131296772;
+			public const int usernameEditText = 2131296772;
+			
+			// aapt resource value: 0x7F090202
+			public const int userToolbar = 2131296770;
 			
 			// aapt resource value: 0x7F090205
-			public const int view_tree_lifecycle_owner = 2131296773;
+			public const int view_offset_helper = 2131296773;
 			
 			// aapt resource value: 0x7F090206
-			public const int view_tree_on_back_pressed_dispatcher_owner = 2131296774;
+			public const int view_tree_lifecycle_owner = 2131296774;
 			
 			// aapt resource value: 0x7F090207
-			public const int view_tree_saved_state_registry_owner = 2131296775;
+			public const int view_tree_on_back_pressed_dispatcher_owner = 2131296775;
 			
 			// aapt resource value: 0x7F090208
-			public const int view_tree_view_model_store_owner = 2131296776;
+			public const int view_tree_saved_state_registry_owner = 2131296776;
 			
 			// aapt resource value: 0x7F090209
-			public const int visible = 2131296777;
+			public const int view_tree_view_model_store_owner = 2131296777;
 			
 			// aapt resource value: 0x7F09020A
-			public const int visible_removing_fragment_view_tag = 2131296778;
+			public const int visible = 2131296778;
 			
 			// aapt resource value: 0x7F09020B
-			public const int weight = 2131296779;
-			
-			// aapt resource value: 0x7F09020D
-			public const int withinBounds = 2131296781;
+			public const int visible_removing_fragment_view_tag = 2131296779;
 			
 			// aapt resource value: 0x7F09020C
-			public const int withText = 2131296780;
+			public const int weight = 2131296780;
 			
 			// aapt resource value: 0x7F09020E
-			public const int wrap = 2131296782;
+			public const int withinBounds = 2131296782;
+			
+			// aapt resource value: 0x7F09020D
+			public const int withText = 2131296781;
 			
 			// aapt resource value: 0x7F09020F
-			public const int wrap_content = 2131296783;
+			public const int wrap = 2131296783;
 			
 			// aapt resource value: 0x7F090210
-			public const int zero_corner_chip = 2131296784;
+			public const int wrap_content = 2131296784;
+			
+			// aapt resource value: 0x7F090211
+			public const int zero_corner_chip = 2131296785;
 			
 			static Id()
 			{

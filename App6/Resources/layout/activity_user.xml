@@ -6,6 +6,32 @@
     android:layout_height="match_parent"
     android:background="@color/splash_background">
 
+    <Toolbar
+        android:id="@+id/userToolbar"
+        android:minHeight="25px"
+        android:minWidth="25px"
+        android:background="@color/colorPrimaryDark"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:elevation="12dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            
+            android:layout_margin="16dp">
+
+            <TextView
+                android:id="@+id/textView1"
+                    android:text="TCoYB"
+                    android:textColor="@color/splash_background"
+                    android:textSize="20dp"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </Toolbar>
 
    
 
@@ -13,13 +39,15 @@
         <TextView
               android:id="@+id/userGreeting"
               android:layout_width="wrap_content"
-              android:layout_height="fill_parent"
+              android:layout_height="wrap_content"
               android:gravity="center"
               android:textSize="30dp"
               android:textColor="@color/colorPrimaryDark"
               android:text="Мои Данные"
               android:layout_centerHorizontal="true" 
-              android:layout_above="@+id/data"/>
+              android:layout_below="@+id/userToolbar"
+              android:layout_above="@+id/data"
+        />
 
         <RelativeLayout
             android:id="@+id/data"
@@ -245,8 +273,9 @@
         android:textSize="16dp"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="25dp"
         android:gravity="center"
-        android:background="@color/mtrl_btn_transparent_bg_color"/>
+        android:background="@drawable/signupbutton"/>
 
             <RelativeLayout
             android:id="@+id/buttons"
@@ -262,7 +291,7 @@
                     android:layout_below="@+id/changeData"
                     android:id="@+id/homeButton"
                     android:tint="@color/colorPrimary"
-                    android:paddingVertical="30dp"
+                    android:paddingVertical="20dp"
                     android:paddingRight="40dp"
                     android:background="@android:color/transparent"
                     />
@@ -274,7 +303,7 @@
                     android:layout_toRightOf="@+id/homeButton"
                     android:id="@+id/logOutButton"
                     android:tint="@color/colorPrimary"
-                    android:paddingVertical="30dp"
+                    android:paddingVertical="20dp"
                     android:background="@android:color/transparent"
                     android:layout_centerHorizontal="true" 
                     />

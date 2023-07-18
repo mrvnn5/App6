@@ -29,6 +29,7 @@ namespace App6.Activities
         private ImageButton homeButton;
         private ImageButton logOutButton;
         private ProgressBar progressBar;
+        public DateTime dt = DateTime.Now.Date.AddYears(-12); 
 
         private bool isChangeMode;
 
@@ -88,8 +89,25 @@ namespace App6.Activities
                 logOutButton.Visibility = ViewStates.Invisible;
             }
 
+       
             changeData.Click += (s, e) =>
             {
+                if ((Convert.ToInt32(editHeight.Text) < 100) || (Convert.ToInt32(editHeight.Text) > 300) || (editHeight.Text.Equals(null)))
+                {
+                    Toast.MakeText(BaseContext, "Рост введён некорректно", ToastLength.Long).Show();
+                    return;
+                }
+                if ((Convert.ToInt32(editWeight.Text) < 35) || (Convert.ToInt32(editWeight.Text) > 300) || (editWeight.Text.Equals(null)))
+                {
+                    Toast.MakeText(BaseContext, "Вес введён некорректно", ToastLength.Long).Show();
+                    return;
+                }
+               
+                if (Convert.ToDateTime(editAge.Text).Date > dt)
+                {
+                    Toast.MakeText(BaseContext, "Упс! Кажется, вам ещё нет 12 лет. Приложение может быть опасным для вас!", ToastLength.Long).Show();
+                    return;
+                }
                 changeData.Enabled = false;
                 if (isChangeMode)
                 {

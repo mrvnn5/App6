@@ -84,29 +84,33 @@
 
             <TextView
                 android:text="0"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.24"
+                android:textSize="15dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:id="@+id/totalMealProtein" />
             <TextView
                 android:text="0"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textSize="15dp"
                 android:layout_weight="0.24"
                 android:textColor="@color/colorPrimaryDark"
                 android:id="@+id/totalMealFat" />
             <TextView
                 android:text="0"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textSize="15dp"
                 android:layout_weight="0.24"
                 android:textColor="@color/colorPrimaryDark"
                 android:id="@+id/totalMealCarb" />
             <TextView
                 android:text="0%"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textSize="15dp"
                 android:layout_weight="0.24"
                 android:textColor="@color/colorPrimaryDark"
                 android:id="@+id/totalMealRci" />
@@ -114,9 +118,9 @@
                 android:background="@color/mtrl_btn_transparent_bg_color"
                 android:src="@drawable/round_expand_more_24"
                 android:tint="@android:color/darker_gray"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.01"
+                android:layout_weight="0.04"
                 android:id="@+id/expandButton"/>
 
         </LinearLayout>

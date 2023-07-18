@@ -4,7 +4,7 @@
 			<item>
 				<shape>
 					<corners android:radius="30dp"></corners>
-					<solid android:color="@android:color/transparent"></solid>
+					<solid android:color="@color/grey"></solid>
 				</shape>
 				<elevation android:elevation="6dp"></elevation>
 			</item>

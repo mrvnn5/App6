@@ -112,15 +112,19 @@ namespace App6.Activities
             var items = RequestService.User.FoodItems
                 .Where(f => f.Date.Date == currentDate.Date).ToList();
 
-            proteinText.Text = items.Sum(i => i.Product.GetProtein() * i.Weight / 100).ToString();
-            fatText.Text = items.Sum(i => i.Product.GetFat() * i.Weight / 100).ToString();
-            carbText.Text = items.Sum(i => i.Product.GetCarb() * i.Weight / 100).ToString();
-            calText.Text = calUsedTextView.Text = items.Sum(i => i.Product.Kcal * i.Weight / 100).ToString();
+            proteinText.Text = Math.Round(items.Sum(i => i.Product.GetProtein() * i.Weight / 100),1).ToString();
+            fatText.Text = Math.Round(items.Sum(i => i.Product.GetFat() * i.Weight / 100),1).ToString();
+            carbText.Text = Math.Round(items.Sum(i => i.Product.GetCarb() * i.Weight / 100),1).ToString();
+            calText.Text = calUsedTextView.Text = Math.Round(items.Sum(i => i.Product.Kcal * i.Weight / 100),1).ToString();
             rciText.Text = items.Sum(i =>
                 (int)Math.Round(
                 (i.Product.Kcal * i.Weight / 100)
                 / RequestService.GetRCI() * 100)) + "%";
-            calLeftTextView.Text = (RequestService.GetRCI() - items.Sum(i => i.Product.Kcal * i.Weight / 100)).ToString();
+            calLeftTextView.Text = Math.Round((RequestService.GetRCI() - items.Sum(i => i.Product.Kcal * i.Weight / 100)),1).ToString();
+            if (Math.Round((RequestService.GetRCI() - items.Sum(i => i.Product.Kcal * i.Weight / 100)), 1) < 5)
+            {
+                calUsedTextView.SetTextColor(Android.Graphics.Color.DarkRed);
+            }
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

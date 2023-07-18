@@ -47,7 +47,7 @@ namespace App6.Adapters
             currentView.FindViewById<TextView>(Resource.Id.productName).Text = item.Product.Name;
 
             double cal = item.Product.Kcal * item.Weight / 100;
-            currentView.FindViewById<TextView>(Resource.Id.cal).Text = cal.ToString();
+            currentView.FindViewById<TextView>(Resource.Id.cal).Text = Math.Round(cal,1).ToString();
 
             currentView.FindViewById<TextView>(Resource.Id.weight).Text = item.Weight.ToString() + " г";
 
@@ -61,13 +61,13 @@ namespace App6.Adapters
             };
 
             double protein = item.Product.GetProtein() * item.Weight / 100;
-            currentView.FindViewById<TextView>(Resource.Id.productProtein).Text = protein.ToString();
+            currentView.FindViewById<TextView>(Resource.Id.productProtein).Text = Math.Round(protein,1).ToString();
 
             double fat = item.Product.GetFat() * item.Weight / 100;
-            currentView.FindViewById<TextView>(Resource.Id.productFat).Text = fat.ToString();
+            currentView.FindViewById<TextView>(Resource.Id.productFat).Text = Math.Round(fat,1).ToString();
 
             double carb = item.Product.GetCarb() * item.Weight / 100;
-            currentView.FindViewById<TextView>(Resource.Id.productCarb).Text = carb.ToString();
+            currentView.FindViewById<TextView>(Resource.Id.productCarb).Text = Math.Round(carb,1).ToString();
             int rci = (int)Math.Round(
                 (item.Product.Kcal * item.Weight / 100)
                 / RequestService.GetRCI() * 100);
@@ -219,10 +219,10 @@ namespace App6.Adapters
             var items = RequestService.User.FoodItems
                 .Where(f => f.Date.Date == currentDate.Date && (int)f.MealType == position).ToList();
 
-            TotalMealProtein.Text = items.Sum(i => i.Product.GetProtein() * i.Weight / 100).ToString();
-            TotalMealFat.Text = items.Sum(i => i.Product.GetFat() * i.Weight / 100).ToString();
-            TotalMealCarb.Text = items.Sum(i => i.Product.GetCarb() * i.Weight / 100).ToString();
-            TotalMealCal.Text = items.Sum(i => i.Product.Kcal * i.Weight / 100) + "\nКкал";
+            TotalMealProtein.Text = Math.Round(items.Sum(i => i.Product.GetProtein() * i.Weight / 100),1).ToString();
+            TotalMealFat.Text = Math.Round(items.Sum(i => i.Product.GetFat() * i.Weight / 100),1).ToString();
+            TotalMealCarb.Text = Math.Round(items.Sum(i => i.Product.GetCarb() * i.Weight / 100),1).ToString();
+            TotalMealCal.Text = Math.Round(items.Sum(i => i.Product.Kcal * i.Weight / 100),1) + "\nКкал";
             TotalMealRci.Text = items.Sum(i =>
                 (int)Math.Round(
                 (i.Product.Kcal * i.Weight / 100)
