@@ -100,12 +100,12 @@ namespace App6.Activities
 
                 if ((Convert.ToInt32(editHeight.Text) < 120) || (Convert.ToInt32(editHeight.Text) > 240) || (editHeight.Text == null))
                 {
-                    Toast.MakeText(BaseContext, "Рост введён некорректно. Данные не сохранены", ToastLength.Long).Show();
+                    Toast.MakeText(BaseContext, "Введите рост в диапазоне от 120 до 240 сантиметров для корректной работы приложения", ToastLength.Long).Show();
                     return;
                 }
                 if ((Convert.ToInt32(editWeight.Text) < 35) || (Convert.ToInt32(editWeight.Text) > 250) || (editWeight.Text==null))
                 {
-                    Toast.MakeText(BaseContext, "Вес введён некорректно. Данные не сохранены", ToastLength.Long).Show();
+                    Toast.MakeText(BaseContext, "Введите вес в диапазоне от 35 до 250 килограмм для корректной работы приложения", ToastLength.Long).Show();
                     return;
                 }
                
@@ -210,6 +210,7 @@ namespace App6.Activities
                 spinnerGender.SetBackgroundResource(Resource.Drawable.spinnerStyleSelected);
                 spinnerActivity.SetBackgroundResource(Resource.Drawable.spinnerStyleSelected);
                 spinnerPlan.SetBackgroundResource(Resource.Drawable.spinnerStyleSelected);
+                rciValue.SetBackgroundResource(Resource.Drawable.RCI_EditText_Selected);
                 changeData.Text = "Сохранить данные";
 
                 isChangeMode = true;

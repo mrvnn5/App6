@@ -14,7 +14,7 @@ namespace App6
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.2.0.99")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.3.0.26")]
 	public partial class Resource
 	{
 		
@@ -12952,224 +12952,227 @@ namespace App6
 			// aapt resource value: 0x7F0800C7
 			public const int outline_check_circle_black_48 = 2131230919;
 			
-			// aapt resource value: 0x7F080104
-			public const int RoundedBorder_EditText = 2131230980;
+			// aapt resource value: 0x7F0800C8
+			public const int RCI_EditText_Selected = 2131230920;
 			
 			// aapt resource value: 0x7F080105
-			public const int RoundedBorder_EditTextSelected = 2131230981;
-			
-			// aapt resource value: 0x7F0800C8
-			public const int round_account_circle_20 = 2131230920;
-			
-			// aapt resource value: 0x7F0800C9
-			public const int round_account_circle_24 = 2131230921;
-			
-			// aapt resource value: 0x7F0800CA
-			public const int round_account_circle_black_18 = 2131230922;
-			
-			// aapt resource value: 0x7F0800CB
-			public const int round_account_circle_black_20 = 2131230923;
-			
-			// aapt resource value: 0x7F0800CC
-			public const int round_account_circle_black_24 = 2131230924;
-			
-			// aapt resource value: 0x7F0800CD
-			public const int round_account_circle_black_36 = 2131230925;
-			
-			// aapt resource value: 0x7F0800CE
-			public const int round_account_circle_black_48 = 2131230926;
-			
-			// aapt resource value: 0x7F0800CF
-			public const int round_account_circle_white_18 = 2131230927;
-			
-			// aapt resource value: 0x7F0800D0
-			public const int round_account_circle_white_20 = 2131230928;
-			
-			// aapt resource value: 0x7F0800D1
-			public const int round_account_circle_white_24 = 2131230929;
-			
-			// aapt resource value: 0x7F0800D2
-			public const int round_account_circle_white_36 = 2131230930;
-			
-			// aapt resource value: 0x7F0800D3
-			public const int round_account_circle_white_48 = 2131230931;
-			
-			// aapt resource value: 0x7F0800D4
-			public const int round_add_20 = 2131230932;
-			
-			// aapt resource value: 0x7F0800D5
-			public const int round_add_24 = 2131230933;
-			
-			// aapt resource value: 0x7F0800D6
-			public const int round_add_black_18 = 2131230934;
-			
-			// aapt resource value: 0x7F0800D7
-			public const int round_add_black_20 = 2131230935;
-			
-			// aapt resource value: 0x7F0800D8
-			public const int round_add_black_24 = 2131230936;
-			
-			// aapt resource value: 0x7F0800D9
-			public const int round_add_black_36 = 2131230937;
-			
-			// aapt resource value: 0x7F0800DA
-			public const int round_add_black_48 = 2131230938;
-			
-			// aapt resource value: 0x7F0800DB
-			public const int round_arrow_back_ios_20 = 2131230939;
-			
-			// aapt resource value: 0x7F0800DC
-			public const int round_arrow_back_ios_24 = 2131230940;
-			
-			// aapt resource value: 0x7F0800DD
-			public const int round_arrow_back_ios_black_18 = 2131230941;
-			
-			// aapt resource value: 0x7F0800DE
-			public const int round_arrow_back_ios_black_20 = 2131230942;
-			
-			// aapt resource value: 0x7F0800DF
-			public const int round_arrow_back_ios_black_24 = 2131230943;
-			
-			// aapt resource value: 0x7F0800E0
-			public const int round_arrow_back_ios_black_36 = 2131230944;
-			
-			// aapt resource value: 0x7F0800E1
-			public const int round_arrow_back_ios_black_48 = 2131230945;
-			
-			// aapt resource value: 0x7F0800E2
-			public const int round_delete_outline_24 = 2131230946;
-			
-			// aapt resource value: 0x7F0800E3
-			public const int round_delete_outline_black_18 = 2131230947;
-			
-			// aapt resource value: 0x7F0800E4
-			public const int round_delete_outline_black_20 = 2131230948;
-			
-			// aapt resource value: 0x7F0800E5
-			public const int round_delete_outline_black_24 = 2131230949;
-			
-			// aapt resource value: 0x7F0800E6
-			public const int round_delete_outline_black_36 = 2131230950;
-			
-			// aapt resource value: 0x7F0800E7
-			public const int round_delete_outline_black_48 = 2131230951;
-			
-			// aapt resource value: 0x7F0800E8
-			public const int round_expand_less_20 = 2131230952;
-			
-			// aapt resource value: 0x7F0800E9
-			public const int round_expand_less_24 = 2131230953;
-			
-			// aapt resource value: 0x7F0800EA
-			public const int round_expand_less_black_18 = 2131230954;
-			
-			// aapt resource value: 0x7F0800EB
-			public const int round_expand_less_black_20 = 2131230955;
-			
-			// aapt resource value: 0x7F0800EC
-			public const int round_expand_less_black_24 = 2131230956;
-			
-			// aapt resource value: 0x7F0800ED
-			public const int round_expand_less_black_36 = 2131230957;
-			
-			// aapt resource value: 0x7F0800EE
-			public const int round_expand_less_black_48 = 2131230958;
-			
-			// aapt resource value: 0x7F0800EF
-			public const int round_expand_more_20 = 2131230959;
-			
-			// aapt resource value: 0x7F0800F0
-			public const int round_expand_more_24 = 2131230960;
-			
-			// aapt resource value: 0x7F0800F1
-			public const int round_expand_more_black_18 = 2131230961;
-			
-			// aapt resource value: 0x7F0800F2
-			public const int round_expand_more_black_20 = 2131230962;
-			
-			// aapt resource value: 0x7F0800F3
-			public const int round_expand_more_black_24 = 2131230963;
-			
-			// aapt resource value: 0x7F0800F4
-			public const int round_expand_more_black_36 = 2131230964;
-			
-			// aapt resource value: 0x7F0800F5
-			public const int round_expand_more_black_48 = 2131230965;
-			
-			// aapt resource value: 0x7F0800F6
-			public const int round_home_20 = 2131230966;
-			
-			// aapt resource value: 0x7F0800F7
-			public const int round_home_24 = 2131230967;
-			
-			// aapt resource value: 0x7F0800F8
-			public const int round_home_black_18 = 2131230968;
-			
-			// aapt resource value: 0x7F0800F9
-			public const int round_home_black_20 = 2131230969;
-			
-			// aapt resource value: 0x7F0800FA
-			public const int round_home_black_24 = 2131230970;
-			
-			// aapt resource value: 0x7F0800FB
-			public const int round_home_black_36 = 2131230971;
-			
-			// aapt resource value: 0x7F0800FC
-			public const int round_home_black_48 = 2131230972;
-			
-			// aapt resource value: 0x7F0800FD
-			public const int round_logout_20 = 2131230973;
-			
-			// aapt resource value: 0x7F0800FE
-			public const int round_logout_24 = 2131230974;
-			
-			// aapt resource value: 0x7F0800FF
-			public const int round_logout_black_18 = 2131230975;
-			
-			// aapt resource value: 0x7F080100
-			public const int round_logout_black_20 = 2131230976;
-			
-			// aapt resource value: 0x7F080101
-			public const int round_logout_black_24 = 2131230977;
-			
-			// aapt resource value: 0x7F080102
-			public const int round_logout_black_36 = 2131230978;
-			
-			// aapt resource value: 0x7F080103
-			public const int round_logout_black_48 = 2131230979;
+			public const int RoundedBorder_EditText = 2131230981;
 			
 			// aapt resource value: 0x7F080106
-			public const int SignInButton = 2131230982;
+			public const int RoundedBorder_EditTextSelected = 2131230982;
+			
+			// aapt resource value: 0x7F0800C9
+			public const int round_account_circle_20 = 2131230921;
+			
+			// aapt resource value: 0x7F0800CA
+			public const int round_account_circle_24 = 2131230922;
+			
+			// aapt resource value: 0x7F0800CB
+			public const int round_account_circle_black_18 = 2131230923;
+			
+			// aapt resource value: 0x7F0800CC
+			public const int round_account_circle_black_20 = 2131230924;
+			
+			// aapt resource value: 0x7F0800CD
+			public const int round_account_circle_black_24 = 2131230925;
+			
+			// aapt resource value: 0x7F0800CE
+			public const int round_account_circle_black_36 = 2131230926;
+			
+			// aapt resource value: 0x7F0800CF
+			public const int round_account_circle_black_48 = 2131230927;
+			
+			// aapt resource value: 0x7F0800D0
+			public const int round_account_circle_white_18 = 2131230928;
+			
+			// aapt resource value: 0x7F0800D1
+			public const int round_account_circle_white_20 = 2131230929;
+			
+			// aapt resource value: 0x7F0800D2
+			public const int round_account_circle_white_24 = 2131230930;
+			
+			// aapt resource value: 0x7F0800D3
+			public const int round_account_circle_white_36 = 2131230931;
+			
+			// aapt resource value: 0x7F0800D4
+			public const int round_account_circle_white_48 = 2131230932;
+			
+			// aapt resource value: 0x7F0800D5
+			public const int round_add_20 = 2131230933;
+			
+			// aapt resource value: 0x7F0800D6
+			public const int round_add_24 = 2131230934;
+			
+			// aapt resource value: 0x7F0800D7
+			public const int round_add_black_18 = 2131230935;
+			
+			// aapt resource value: 0x7F0800D8
+			public const int round_add_black_20 = 2131230936;
+			
+			// aapt resource value: 0x7F0800D9
+			public const int round_add_black_24 = 2131230937;
+			
+			// aapt resource value: 0x7F0800DA
+			public const int round_add_black_36 = 2131230938;
+			
+			// aapt resource value: 0x7F0800DB
+			public const int round_add_black_48 = 2131230939;
+			
+			// aapt resource value: 0x7F0800DC
+			public const int round_arrow_back_ios_20 = 2131230940;
+			
+			// aapt resource value: 0x7F0800DD
+			public const int round_arrow_back_ios_24 = 2131230941;
+			
+			// aapt resource value: 0x7F0800DE
+			public const int round_arrow_back_ios_black_18 = 2131230942;
+			
+			// aapt resource value: 0x7F0800DF
+			public const int round_arrow_back_ios_black_20 = 2131230943;
+			
+			// aapt resource value: 0x7F0800E0
+			public const int round_arrow_back_ios_black_24 = 2131230944;
+			
+			// aapt resource value: 0x7F0800E1
+			public const int round_arrow_back_ios_black_36 = 2131230945;
+			
+			// aapt resource value: 0x7F0800E2
+			public const int round_arrow_back_ios_black_48 = 2131230946;
+			
+			// aapt resource value: 0x7F0800E3
+			public const int round_delete_outline_24 = 2131230947;
+			
+			// aapt resource value: 0x7F0800E4
+			public const int round_delete_outline_black_18 = 2131230948;
+			
+			// aapt resource value: 0x7F0800E5
+			public const int round_delete_outline_black_20 = 2131230949;
+			
+			// aapt resource value: 0x7F0800E6
+			public const int round_delete_outline_black_24 = 2131230950;
+			
+			// aapt resource value: 0x7F0800E7
+			public const int round_delete_outline_black_36 = 2131230951;
+			
+			// aapt resource value: 0x7F0800E8
+			public const int round_delete_outline_black_48 = 2131230952;
+			
+			// aapt resource value: 0x7F0800E9
+			public const int round_expand_less_20 = 2131230953;
+			
+			// aapt resource value: 0x7F0800EA
+			public const int round_expand_less_24 = 2131230954;
+			
+			// aapt resource value: 0x7F0800EB
+			public const int round_expand_less_black_18 = 2131230955;
+			
+			// aapt resource value: 0x7F0800EC
+			public const int round_expand_less_black_20 = 2131230956;
+			
+			// aapt resource value: 0x7F0800ED
+			public const int round_expand_less_black_24 = 2131230957;
+			
+			// aapt resource value: 0x7F0800EE
+			public const int round_expand_less_black_36 = 2131230958;
+			
+			// aapt resource value: 0x7F0800EF
+			public const int round_expand_less_black_48 = 2131230959;
+			
+			// aapt resource value: 0x7F0800F0
+			public const int round_expand_more_20 = 2131230960;
+			
+			// aapt resource value: 0x7F0800F1
+			public const int round_expand_more_24 = 2131230961;
+			
+			// aapt resource value: 0x7F0800F2
+			public const int round_expand_more_black_18 = 2131230962;
+			
+			// aapt resource value: 0x7F0800F3
+			public const int round_expand_more_black_20 = 2131230963;
+			
+			// aapt resource value: 0x7F0800F4
+			public const int round_expand_more_black_24 = 2131230964;
+			
+			// aapt resource value: 0x7F0800F5
+			public const int round_expand_more_black_36 = 2131230965;
+			
+			// aapt resource value: 0x7F0800F6
+			public const int round_expand_more_black_48 = 2131230966;
+			
+			// aapt resource value: 0x7F0800F7
+			public const int round_home_20 = 2131230967;
+			
+			// aapt resource value: 0x7F0800F8
+			public const int round_home_24 = 2131230968;
+			
+			// aapt resource value: 0x7F0800F9
+			public const int round_home_black_18 = 2131230969;
+			
+			// aapt resource value: 0x7F0800FA
+			public const int round_home_black_20 = 2131230970;
+			
+			// aapt resource value: 0x7F0800FB
+			public const int round_home_black_24 = 2131230971;
+			
+			// aapt resource value: 0x7F0800FC
+			public const int round_home_black_36 = 2131230972;
+			
+			// aapt resource value: 0x7F0800FD
+			public const int round_home_black_48 = 2131230973;
+			
+			// aapt resource value: 0x7F0800FE
+			public const int round_logout_20 = 2131230974;
+			
+			// aapt resource value: 0x7F0800FF
+			public const int round_logout_24 = 2131230975;
+			
+			// aapt resource value: 0x7F080100
+			public const int round_logout_black_18 = 2131230976;
+			
+			// aapt resource value: 0x7F080101
+			public const int round_logout_black_20 = 2131230977;
+			
+			// aapt resource value: 0x7F080102
+			public const int round_logout_black_24 = 2131230978;
+			
+			// aapt resource value: 0x7F080103
+			public const int round_logout_black_36 = 2131230979;
+			
+			// aapt resource value: 0x7F080104
+			public const int round_logout_black_48 = 2131230980;
 			
 			// aapt resource value: 0x7F080107
-			public const int SignUpButton = 2131230983;
-			
-			// aapt resource value: 0x7F080109
-			public const int spinnerStyle = 2131230985;
-			
-			// aapt resource value: 0x7F08010A
-			public const int spinnerStyleSelected = 2131230986;
+			public const int SignInButton = 2131230983;
 			
 			// aapt resource value: 0x7F080108
-			public const int spinner_item = 2131230984;
+			public const int SignUpButton = 2131230984;
+			
+			// aapt resource value: 0x7F08010A
+			public const int spinnerStyle = 2131230986;
 			
 			// aapt resource value: 0x7F08010B
-			public const int splash_logo = 2131230987;
+			public const int spinnerStyleSelected = 2131230987;
+			
+			// aapt resource value: 0x7F080109
+			public const int spinner_item = 2131230985;
 			
 			// aapt resource value: 0x7F08010C
-			public const int splash_screen = 2131230988;
+			public const int splash_logo = 2131230988;
 			
 			// aapt resource value: 0x7F08010D
-			public const int test_custom_background = 2131230989;
+			public const int splash_screen = 2131230989;
 			
 			// aapt resource value: 0x7F08010E
-			public const int test_level_drawable = 2131230990;
+			public const int test_custom_background = 2131230990;
 			
 			// aapt resource value: 0x7F08010F
-			public const int tooltip_frame_dark = 2131230991;
+			public const int test_level_drawable = 2131230991;
 			
 			// aapt resource value: 0x7F080110
-			public const int tooltip_frame_light = 2131230992;
+			public const int tooltip_frame_dark = 2131230992;
+			
+			// aapt resource value: 0x7F080111
+			public const int tooltip_frame_light = 2131230993;
 			
 			static Drawable()
 			{
