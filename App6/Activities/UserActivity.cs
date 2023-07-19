@@ -92,14 +92,19 @@ namespace App6.Activities
        
             changeData.Click += (s, e) =>
             {
-                if ((Convert.ToInt32(editHeight.Text) < 100) || (Convert.ToInt32(editHeight.Text) > 300) || (editHeight.Text.Equals(null)))
+                if(editHeight.Text=="" || editWeight.Text== "" || editAge.Text== "")
                 {
-                    Toast.MakeText(BaseContext, "Рост введён некорректно", ToastLength.Long).Show();
+                    Toast.MakeText(BaseContext, "Пожалуйста, заполните все поля", ToastLength.Long).Show();
                     return;
                 }
-                if ((Convert.ToInt32(editWeight.Text) < 35) || (Convert.ToInt32(editWeight.Text) > 300) || (editWeight.Text.Equals(null)))
+                if ((Convert.ToInt32(editHeight.Text) < 120) || (Convert.ToInt32(editHeight.Text) > 240))
                 {
-                    Toast.MakeText(BaseContext, "Вес введён некорректно", ToastLength.Long).Show();
+                    Toast.MakeText(BaseContext, "Рост введён некорректно. Данные не сохранены", ToastLength.Long).Show();
+                    return;
+                }
+                if ((Convert.ToInt32(editWeight.Text) < 35) || (Convert.ToInt32(editWeight.Text) > 250))
+                {
+                    Toast.MakeText(BaseContext, "Вес введён некорректно. Данные не сохранены", ToastLength.Long).Show();
                     return;
                 }
                

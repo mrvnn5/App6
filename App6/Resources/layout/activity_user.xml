@@ -8,10 +8,9 @@
 
     <Toolbar
         android:id="@+id/userToolbar"
-        android:minHeight="25px"
+        android:layout_height="72dp"
         android:minWidth="25px"
         android:background="@color/colorPrimaryDark"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:elevation="12dp">
 
